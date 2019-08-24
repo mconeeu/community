@@ -21,6 +21,9 @@ public class EntitiyDamageListener implements Listener {
             Player p = (Player) e.getEntity();
             e.setCancelled(true);
         }
+        if (e.getCause().equals(EntityDamageEvent.DamageCause.FALL) && e.getEntity() instanceof Player) {
+            e.setCancelled(true);
+        }
     }
 
     @EventHandler

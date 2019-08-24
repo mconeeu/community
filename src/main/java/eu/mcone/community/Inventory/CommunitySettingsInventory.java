@@ -1,5 +1,6 @@
 package eu.mcone.community.Inventory;
 
+import eu.mcone.community.Community;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
@@ -16,19 +17,19 @@ public class CommunitySettingsInventory extends CoreInventory {
         super("§f§lCommunity Einstellung", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
 
-        if (p.isFlying()) {
-            setItem(InventorySlot.ROW_2_SLOT_2, new ItemBuilder(Material.FEATHER, 1, 0).displayName("§f§lFlugmodus aktiviert").lore("§7§oKlicke zum deaktivieren").create(), e -> {
+        if (p.getAllowFlight()) {
+            setItem(InventorySlot.ROW_2_SLOT_2, new ItemBuilder(Material.FEATHER, 1, 0).displayName("§a§lFlugmodus aktiviert").lore("§7§oKlicke zum deaktivieren").create(), e -> {
                 p.closeInventory();
                 p.setAllowFlight(false);
                 p.setFlying(false);
-                p.closeInventory();
+                Community.getInstance().getMessager().send(p, "§cDu kannst nun nicht mehr fliegen");
             });
         } else {
-            setItem(InventorySlot.ROW_2_SLOT_2, new ItemBuilder(Material.FEATHER, 1, 0).displayName("§f§lFlugmodus deaktivieren").lore("§7§oKlicke zum aktivieren").create(), e -> {
+            setItem(InventorySlot.ROW_2_SLOT_2, new ItemBuilder(Material.FEATHER, 1, 0).displayName("§d§lFlugmodus deaktiviert").lore("§7§oKlicke hier zum aktivieren").create(), e -> {
                 p.closeInventory();
+                Community.getInstance().getMessager().send(p, "§aDu kannst nun fliegen");
                 p.setAllowFlight(true);
                 p.setFlying(true);
-                p.closeInventory();
             });
 
         }

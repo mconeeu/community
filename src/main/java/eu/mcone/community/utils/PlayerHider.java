@@ -42,7 +42,7 @@ public class PlayerHider {
         p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 0));
         p.playSound(p.getLocation(), Sound.LAVA_POP, 1.0F, 1.0F);
         p.playEffect(p.getLocation(), Effect.FIREWORKS_SPARK, 1);
-        p.getInventory().setItem(0, new ItemBuilder(Material.INK_SACK, 1, 2).displayName("§3§lSpieler Anzeigen §8» §7§oZeigt alle Spieler wieder an").create());
+        p.getInventory().setItem(7, new ItemBuilder(Material.INK_SACK, 1, 2).displayName("§3§lSpieler Anzeigen §8» §7§oZeigt alle Spieler wieder an").create());
         Community.getInstance().getMessager().send(p, "§7Du siehst nun §ckeine §7Spieler mehr.");
         time.put(p.getName(), System.currentTimeMillis());
     }
@@ -57,7 +57,7 @@ public class PlayerHider {
         p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 0));
         p.playSound(p.getLocation(), Sound.LAVA_POP, 1.0F, 1.0F);
         p.playEffect(p.getLocation(), Effect.FIREWORKS_SPARK, 1);
-        p.getInventory().setItem(0, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus").create());
+        p.getInventory().setItem(7, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus").create());
         Community.getInstance().getMessager().send(p, "§7Du siehst nun §aalle §7Spieler wieder.");
         time.put(p.getName(), System.currentTimeMillis());
     }

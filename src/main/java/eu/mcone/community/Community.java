@@ -1,9 +1,6 @@
 package eu.mcone.community;
 
-import eu.mcone.community.Listener.GeneralPlayerListener;
-import eu.mcone.community.Listener.InventoryTriggerListener;
-import eu.mcone.community.Listener.PlayerJoinListener;
-import eu.mcone.community.Listener.WeatherChangeListener;
+import eu.mcone.community.Listener.*;
 import eu.mcone.coresystem.api.bukkit.CorePlugin;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.world.BuildSystem;
@@ -20,7 +17,12 @@ public class Community extends CorePlugin {
 
     public Community() {
         super("community", ChatColor.LIGHT_PURPLE, "community.prefix");
+    }
+
+    @Override
+    public void onEnable() {
         instance = this;
+        CoreSystem.getInstance().getTranslationManager().loadCategories(this);
 
         buildSystem = CoreSystem.getInstance().initialiseBuildSystem(BuildSystem.BuildEvent.BLOCK_BREAK, BuildSystem.BuildEvent.BLOCK_PLACE, BuildSystem.BuildEvent.INTERACT);
 
@@ -28,12 +30,10 @@ public class Community extends CorePlugin {
                 new PlayerJoinListener(),
                 new InventoryTriggerListener(),
                 new GeneralPlayerListener(),
-                new WeatherChangeListener()
+                new WeatherChangeListener(),
+                new EntitiyDamageListener()
         );
-    }
 
-    @Override
-    public void onEnable() {
         sendConsoleMessage("§aVersion §f" + this.getDescription().getVersion() + "§a enabled...");
     }
 
