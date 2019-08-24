@@ -1,0 +1,10 @@
+name: MCONE-Communtiy
+authors: [Marvin Hülsmann, Rufus Maiwald]
+version: ${project.version}
+main: eu.mcone.community.Community
+depend: [MCONE-BukkitCoreSystem, MCONE-GameSystem]
+softdepend: [NoCheatPlus]
+
+permissions:
+  citybuild:
+    description: Citybuild Main Permission
