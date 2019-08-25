@@ -5,13 +5,14 @@
 
 package eu.mcone.community.Listener;
 
+import eu.mcone.community.Community;
 import eu.mcone.community.Inventory.CommunitySettingsInventory;
+import eu.mcone.community.Inventory.NavigatorInventory;
 import eu.mcone.community.utils.PlayerHider;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
-import eu.mcone.coresystem.api.bukkit.event.NickEvent;
-import eu.mcone.coresystem.api.bukkit.event.UnnickEvent;
-import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
+import org.bukkit.Effect;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -19,8 +20,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.HashMap;
 
 public class InventoryTriggerListener implements Listener {
+
+    public static HashMap<Player, BukkitRunnable> run = new HashMap<>();
 
     @EventHandler
     public void on(PlayerInteractEvent e) {
@@ -43,14 +49,41 @@ public class InventoryTriggerListener implements Listener {
                 e.setCancelled(true);
                 PlayerHider.showPlayers(p);
             } else if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lNavigator §8» §7§oTelepotiere dich durch die Welt")) {
+                new NavigatorInventory(p);
                 e.setCancelled(true);
                 p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
 
             } else if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lCommunity Einstellungen §8» §7§oBearbeite Team einstellungen")) {
                 e.setCancelled(true);
                 new CommunitySettingsInventory(p);
+            } else if (e.getItem().getType() == Material.EYE_OF_ENDER) {
+                if (e.getAction() == Action.RIGHT_CLICK_AIR | e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+                    e.setCancelled(true);
+                    if (run.containsKey(p)) {
+                        Community.getInstance().getMessager().send(p, "§cDas Schutzschild wurde deaktiviert");
+                        p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 2F, 0.5F);
+                        run.get(p).cancel();
+                        run.remove(p);
+                    } else if (!run.containsKey(p)) {
+                        run.put(p, new BukkitRunnable() {
+
+
+                            @Override
+                            public void run() {
+                                p.getWorld().playEffect(p.getLocation(), Effect.ENDER_SIGNAL, 100,100);
+                                p.getWorld().playEffect(p.getLocation(), Effect.ENDER_SIGNAL, 100,100);
+
+                            }
+
+                        });
+                        run.get(p).runTaskTimer(Community.getInstance(), 20, 20);
+                        Community.getInstance().getMessager().send(p,"§aDas Schutzschild wurde aktiviert");
+                        p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 2F, 1F);
+                    }
+
+                }
             }
         }
-    }
 
+    }
 }

@@ -19,8 +19,11 @@ public class Community extends CorePlugin {
         super("community", ChatColor.LIGHT_PURPLE, "community.prefix");
     }
 
+
+
     @Override
     public void onEnable() {
+
         instance = this;
         CoreSystem.getInstance().getTranslationManager().loadCategories(this);
 
@@ -31,7 +34,9 @@ public class Community extends CorePlugin {
                 new InventoryTriggerListener(),
                 new GeneralPlayerListener(),
                 new WeatherChangeListener(),
-                new EntitiyDamageListener()
+                new EntitiyDamageListener(),
+                new PlayerQuitListener(),
+                new PlayerMoveListener()
         );
 
         sendConsoleMessage("§aVersion §f" + this.getDescription().getVersion() + "§a enabled...");
