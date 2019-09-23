@@ -5,6 +5,7 @@
 
 package eu.mcone.community.Listener;
 
+import eu.mcone.community.Community;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
@@ -26,11 +27,11 @@ public class PlayerJoinListener implements Listener {
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
 
         e.setJoinMessage(null);
-
-
         p.playEffect(p.getLocation(), org.bukkit.Effect.HAPPY_VILLAGER, 5);
 
         p.setWalkSpeed(0.2F);
+
+        Community.getInstance().getCommunityWorld().teleportSilently(p,"spawn");
 
         p.getInventory().clear();
         p.getInventory().setArmorContents(null);

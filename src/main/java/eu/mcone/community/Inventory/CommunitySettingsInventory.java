@@ -25,14 +25,39 @@ public class CommunitySettingsInventory extends CoreInventory {
                 Community.getInstance().getMessager().send(p, "§cDu kannst nun nicht mehr fliegen");
             });
         } else {
-            setItem(InventorySlot.ROW_2_SLOT_2, new ItemBuilder(Material.FEATHER, 1, 0).displayName("§d§lFlugmodus deaktiviert").lore("§7§oKlicke hier zum aktivieren").create(), e -> {
+            setItem(InventorySlot.ROW_2_SLOT_2, new ItemBuilder(Material.FEATHER, 1, 0).displayName("§c§lFlugmodus deaktiviert").lore("§7§oKlicke hier zum aktivieren").create(), e -> {
                 p.closeInventory();
                 Community.getInstance().getMessager().send(p, "§aDu kannst nun fliegen");
                 p.setAllowFlight(true);
                 p.setFlying(true);
+
+            });
+        }
+        if (Community.getInstance().getBuildSystem().hasBuildModeEnabled(p)) {
+            setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.GRASS, 1, 0).displayName("§a§lBuildmodus aktiviert").lore("§7§oKlicke zum deaktivieren").create(), e -> {
+                p.closeInventory();
+                Community.getInstance().getBuildSystem().changeBuildMode(p);
+            });
+        } else {
+            setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.GRASS, 1, 0).displayName("§c§lBuildmodus deaktiviert").lore("§7§oKlicke hier zum aktivieren").create(), e -> {
+                p.closeInventory();
+                Community.getInstance().getBuildSystem().changeBuildMode(p);
             });
 
         }
+        if (cp.isVanished()) {
+            setItem(InventorySlot.ROW_2_SLOT_4, new ItemBuilder(Material.POTION, 1, 0).displayName("§a§lVanish-Modus aktiviert").lore("§7§oKlicke zum deaktivieren").create(), e -> {
+                p.closeInventory();
+                cp.setVanished(false);
+            });
+        } else {
+            setItem(InventorySlot.ROW_2_SLOT_4, new ItemBuilder(Material.POTION, 1, 0).displayName("§c§lVanish-Modus deaktiviert").lore("§7§oKlicke hier zum aktivieren").create(), e -> {
+                p.closeInventory();
+                cp.setVanished(true);
+            });
+
+        }
+
         openInventory();
     }
 }

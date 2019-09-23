@@ -4,6 +4,7 @@ import eu.mcone.community.Listener.*;
 import eu.mcone.coresystem.api.bukkit.CorePlugin;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.world.BuildSystem;
+import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
 import lombok.Getter;
 import org.bukkit.ChatColor;
 
@@ -14,6 +15,8 @@ public class Community extends CorePlugin {
 
     @Getter
     private BuildSystem buildSystem;
+    @Getter
+    private CoreWorld communityWorld;
 
     public Community() {
         super("community", ChatColor.LIGHT_PURPLE, "community.prefix");
@@ -25,9 +28,12 @@ public class Community extends CorePlugin {
     public void onEnable() {
 
         instance = this;
+        communityWorld = CoreSystem.getInstance().getWorldManager().getWorld("Community");
         CoreSystem.getInstance().getTranslationManager().loadCategories(this);
+        CoreSystem.getInstance().enableSpawnCommand(this, communityWorld, 0);
 
         buildSystem = CoreSystem.getInstance().initialiseBuildSystem(BuildSystem.BuildEvent.BLOCK_BREAK, BuildSystem.BuildEvent.BLOCK_PLACE, BuildSystem.BuildEvent.INTERACT);
+        buildSystem.addFilter(BuildSystem.BuildEvent.INTERACT, 69);
 
         registerEvents(
                 new PlayerJoinListener(),
