@@ -5,12 +5,11 @@
 
 package eu.mcone.community.Listener;
 
-import eu.mcone.community.Community;
+import eu.mcone.community.CommunityPlugin;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
-import eu.mcone.gamesystem.api.enums.Item;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -31,7 +30,7 @@ public class PlayerJoinListener implements Listener {
 
         p.setWalkSpeed(0.2F);
 
-        Community.getInstance().getCommunityWorld().teleportSilently(p,"spawn");
+        CommunityPlugin.getInstance().getCommunityWorld().teleportSilently(p,"spawn");
 
         p.getInventory().clear();
         p.getInventory().setArmorContents(null);
@@ -50,43 +49,12 @@ public class PlayerJoinListener implements Listener {
         p.getInventory().setItem(8, new Skull(p.getName(), 1).toItemBuilder().displayName("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde").create());
         p.getInventory().setItem(7, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus").create());
 
-        if (p.hasPermission("Community.settings") || p.getName().equalsIgnoreCase("DrMarv")) {
+        if (p.hasPermission("community.settings") || p.getName().equalsIgnoreCase("DrMarv")) {
             p.getInventory().setItem(6, new ItemBuilder(Material.REDSTONE_COMPARATOR, 1, 0).displayName("§3§lCommunity Einstellungen §8» §7§oBearbeite Team einstellungen").create());
         }
-        if (p.hasPermission("Community.protective.shield") || p.getName().equalsIgnoreCase("DrMarv")) {
+        if (p.hasPermission("community.protective.shield") || p.getName().equalsIgnoreCase("DrMarv")) {
             p.getInventory().setItem(5, new ItemBuilder(Material.EYE_OF_ENDER, 1, 0).displayName("§3§lSchutzschild §8» §7§oSchleuder Spieler weg").create());
         }
-        switch (cp.getMainGroup()) {
-            case PREMIUM:
-                p.getInventory().setBoots(Item.PREMIUM_BOOTS.getItemStack());
-                break;
-            case PREMIUMPLUS:
-                p.getInventory().setBoots(Item.PREMIUM_PLUS_BOOTS.getItemStack());
-                break;
-            case YOUTUBER:
-                p.getInventory().setBoots(Item.YOUTUBER_BOOTS.getItemStack());
-                break;
-            case JRSUPPORTER:
-                p.getInventory().setBoots(Item.JR_SUPPORTER_BOOTS.getItemStack());
-                break;
-            case SUPPORTER:
-                p.getInventory().setBoots(Item.SUPPORTER_BOOTS.getItemStack());
-                break;
-            case MODERATOR:
-                p.getInventory().setBoots(Item.MODERATOR_BOOTS.getItemStack());
-                break;
-            case SRMODERATOR:
-                p.getInventory().setBoots(Item.SR_MODERATOR_BOOTS.getItemStack());
-                break;
-            case BUILDER:
-                p.getInventory().setBoots(Item.BUILDER_BOOTS.getItemStack());
-                break;
-            case DEVELOPER:
-                p.getInventory().setBoots(Item.DEVELOPER_BOOTS.getItemStack());
-                break;
-            case ADMIN:
-                p.getInventory().setBoots(Item.ADMIN_BOOTS.getItemStack());
-                break;
-        }
+
     }
 }

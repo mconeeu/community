@@ -5,7 +5,7 @@
 
 package eu.mcone.community.utils;
 
-import eu.mcone.community.Community;
+import eu.mcone.community.CommunityPlugin;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
@@ -28,7 +28,7 @@ public class PlayerHider {
             long diff = (System.currentTimeMillis() - time.get(p.getName())) / 10L / 60L;
             int cooldown = 1;
             if (diff < cooldown){
-                Community.getInstance().getMessager().send(p, "§7Du musst kurz warte um den Player hider wieder benutzen zu können");
+                CommunityPlugin.getInstance().getMessager().send(p, "§7Du musst kurz warte um den Player hider wieder benutzen zu können");
                 return;
             }
         }
@@ -43,7 +43,7 @@ public class PlayerHider {
         p.playSound(p.getLocation(), Sound.LAVA_POP, 1.0F, 1.0F);
         p.playEffect(p.getLocation(), Effect.FIREWORKS_SPARK, 1);
         p.getInventory().setItem(7, new ItemBuilder(Material.INK_SACK, 1, 2).displayName("§3§lSpieler Anzeigen §8» §7§oZeigt alle Spieler wieder an").create());
-        Community.getInstance().getMessager().send(p, "§7Du siehst nun §ckeine §7Spieler mehr.");
+        CommunityPlugin.getInstance().getMessager().send(p, "§7Du siehst nun §ckeine §7Spieler mehr.");
         time.put(p.getName(), System.currentTimeMillis());
     }
 
@@ -58,7 +58,7 @@ public class PlayerHider {
         p.playSound(p.getLocation(), Sound.LAVA_POP, 1.0F, 1.0F);
         p.playEffect(p.getLocation(), Effect.FIREWORKS_SPARK, 1);
         p.getInventory().setItem(7, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus").create());
-        Community.getInstance().getMessager().send(p, "§7Du siehst nun §aalle §7Spieler wieder.");
+        CommunityPlugin.getInstance().getMessager().send(p, "§7Du siehst nun §aalle §7Spieler wieder.");
         time.put(p.getName(), System.currentTimeMillis());
     }
 

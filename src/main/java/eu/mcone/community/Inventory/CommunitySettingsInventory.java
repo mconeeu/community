@@ -1,6 +1,6 @@
 package eu.mcone.community.Inventory;
 
-import eu.mcone.community.Community;
+import eu.mcone.community.CommunityPlugin;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
@@ -22,27 +22,29 @@ public class CommunitySettingsInventory extends CoreInventory {
                 p.closeInventory();
                 p.setAllowFlight(false);
                 p.setFlying(false);
-                Community.getInstance().getMessager().send(p, "§cDu kannst nun nicht mehr fliegen");
+                CommunityPlugin.getInstance().getMessager().send(p, "§cDu kannst nun nicht mehr fliegen");
             });
         } else {
             setItem(InventorySlot.ROW_2_SLOT_2, new ItemBuilder(Material.FEATHER, 1, 0).displayName("§c§lFlugmodus deaktiviert").lore("§7§oKlicke hier zum aktivieren").create(), e -> {
                 p.closeInventory();
-                Community.getInstance().getMessager().send(p, "§aDu kannst nun fliegen");
+                CommunityPlugin.getInstance().getMessager().send(p, "§aDu kannst nun fliegen");
                 p.setAllowFlight(true);
                 p.setFlying(true);
 
             });
         }
-        if (Community.getInstance().getBuildSystem().hasBuildModeEnabled(p)) {
+        if (CommunityPlugin.getInstance().getBuildSystem().hasBuildModeEnabled(p)) {
+            if (p.hasPermission("system.bukkit.build")) {
             setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.GRASS, 1, 0).displayName("§a§lBuildmodus aktiviert").lore("§7§oKlicke zum deaktivieren").create(), e -> {
                 p.closeInventory();
-                Community.getInstance().getBuildSystem().changeBuildMode(p);
+                CommunityPlugin.getInstance().getBuildSystem().changeBuildMode(p);
             });
         } else {
-            setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.GRASS, 1, 0).displayName("§c§lBuildmodus deaktiviert").lore("§7§oKlicke hier zum aktivieren").create(), e -> {
-                p.closeInventory();
-                Community.getInstance().getBuildSystem().changeBuildMode(p);
-            });
+                setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.GRASS, 1, 0).displayName("§c§lBuildmodus deaktiviert").lore("§7§oKlicke hier zum aktivieren").create(), e -> {
+                    p.closeInventory();
+                    CommunityPlugin.getInstance().getBuildSystem().changeBuildMode(p);
+                });
+            }
 
         }
         if (cp.isVanished()) {

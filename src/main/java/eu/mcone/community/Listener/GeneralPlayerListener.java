@@ -5,7 +5,7 @@
 
 package eu.mcone.community.Listener;
 
-import eu.mcone.community.Community;
+import eu.mcone.community.CommunityPlugin;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -25,7 +25,7 @@ public class GeneralPlayerListener implements Listener {
     public void onInventoryClick(InventoryClickEvent e) {
         if (e.getWhoClicked() instanceof Player) {
             Player p = (Player) e.getWhoClicked();
-            if (!Community.getInstance().getBuildSystem().hasBuildModeEnabled(p)) e.setCancelled(true);
+            if (!CommunityPlugin.getInstance().getBuildSystem().hasBuildModeEnabled(p)) e.setCancelled(true);
         }
     }
 

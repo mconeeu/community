@@ -5,12 +5,14 @@
 
 package eu.mcone.community.Listener;
 
-import eu.mcone.community.Community;
+import eu.mcone.community.CommunityPlugin;
 import eu.mcone.community.Inventory.CommunitySettingsInventory;
 import eu.mcone.community.Inventory.NavigatorInventory;
+import eu.mcone.community.player.CommunityPlayer;
 import eu.mcone.community.utils.PlayerHider;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
+import eu.mcone.lobby.api.enums.Category;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -31,7 +33,6 @@ public class InventoryTriggerListener implements Listener {
     @EventHandler
     public void on(PlayerInteractEvent e) {
         Player p = e.getPlayer();
-        CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
 
         if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
             ItemStack i = p.getItemInHand();
@@ -39,7 +40,10 @@ public class InventoryTriggerListener implements Listener {
                 return;
             }
 
-            if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde")) {
+            if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lRucksack §8» §7§oZeige deine gesammelten Items an")) {
+                e.setCancelled(true);
+                CommunityPlugin.getInstance().getBackpackManager().openBackpackInventory(Category.STORY_ITEMS.name(), p);
+            } else if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde")) {
                 e.setCancelled(true);
                 p.performCommand("profile");
             } else if (p.getItemInHand().getItemMeta().getDisplayName().equals("§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus")) {
@@ -60,7 +64,7 @@ public class InventoryTriggerListener implements Listener {
                 if (e.getAction() == Action.RIGHT_CLICK_AIR | e.getAction() == Action.RIGHT_CLICK_BLOCK) {
                     e.setCancelled(true);
                     if (run.containsKey(p)) {
-                        Community.getInstance().getMessager().send(p, "§cDas Schutzschild wurde deaktiviert");
+                        CommunityPlugin.getInstance().getMessager().send(p, "§cDas Schutzschild wurde deaktiviert");
                         p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 2F, 0.5F);
                         run.get(p).cancel();
                         run.remove(p);
@@ -76,8 +80,8 @@ public class InventoryTriggerListener implements Listener {
                             }
 
                         });
-                        run.get(p).runTaskTimer(Community.getInstance(), 20, 20);
-                        Community.getInstance().getMessager().send(p,"§aDas Schutzschild wurde aktiviert");
+                        run.get(p).runTaskTimer(CommunityPlugin.getInstance(), 20, 20);
+                        CommunityPlugin.getInstance().getMessager().send(p,"§aDas Schutzschild wurde aktiviert");
                         p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 2F, 1F);
                     }
 

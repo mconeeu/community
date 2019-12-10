@@ -1,6 +1,6 @@
 package eu.mcone.community.Inventory;
 
-import eu.mcone.community.Community;
+import eu.mcone.community.CommunityPlugin;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
@@ -19,16 +19,16 @@ public class NavigatorInventory extends CoreInventory {
 
 
         setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.FIREWORK_CHARGE, 1, 0).displayName("§b§lBühne").lore("§7§oKlicke zum Telepotieren").create(), e -> {
-            Community.getInstance().getCommunityWorld().teleportSilently(p, "buehne");
+            CommunityPlugin.getInstance().getCommunityWorld().teleportSilently(p, "buehne");
             p.closeInventory();
-            Community.getInstance().getMessager().send(p, "§aDu bist nun bei der Bühne!");
-            Community.getInstance().getCommunityWorld().teleportSilently(p,"buehne");
+            CommunityPlugin.getInstance().getMessager().send(p, "§aDu bist nun bei der Bühne!");
+            CommunityPlugin.getInstance().getCommunityWorld().teleportSilently(p,"buehne");
         });
 
-        setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.NETHER_STAR, 1, 0).displayName("§b§lSpawn").lore("§7§oKlicke zum Telepotieren").create(), e -> {
-            Community.getInstance().getCommunityWorld().teleportSilently(p, "spawn");
+        setItem(InventorySlot.ROW_2_SLOT_7, new ItemBuilder(Material.NETHER_STAR, 1, 0).displayName("§b§lSpawn").lore("§7§oKlicke zum Telepotieren").create(), e -> {
+            CommunityPlugin.getInstance().getCommunityWorld().teleportSilently(p, "spawn");
             p.closeInventory();
-            Community.getInstance().getMessager().send(p, "§aDu bist nun beim Spawn!");
+            CommunityPlugin.getInstance().getMessager().send(p, "§aDu bist nun beim Spawn!");
         });
 
         openInventory();

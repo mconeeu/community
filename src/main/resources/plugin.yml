@@ -8,3 +8,6 @@ softdepend: [NoCheatPlus]
 permissions:
   citybuild:
     description: Citybuild Main Permission
+    children:
+      community.settings:
+        description: change settings
