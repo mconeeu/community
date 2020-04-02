@@ -12,5 +12,8 @@ public class EffectInventory extends CoreInventory {
     public EffectInventory(Player p) {
         super("§f§lBühnen Effekte", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
+
+
+
     }
 }

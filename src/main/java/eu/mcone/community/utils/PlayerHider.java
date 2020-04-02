@@ -28,7 +28,7 @@ public class PlayerHider {
             long diff = (System.currentTimeMillis() - time.get(p.getName())) / 10L / 60L;
             int cooldown = 1;
             if (diff < cooldown){
-                CommunityPlugin.getInstance().getMessager().send(p, "§7Du musst kurz warte um den Player hider wieder benutzen zu können");
+                CommunityPlugin.getInstance().getMessager().send(p, "§7Du musst kurz warte um den Player Hider wieder benutzen zu können");
                 return;
             }
         }

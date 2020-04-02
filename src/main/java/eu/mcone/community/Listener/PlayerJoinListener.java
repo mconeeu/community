@@ -10,6 +10,7 @@ import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
+import eu.mcone.lobby.api.LobbyPlugin;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -30,7 +31,7 @@ public class PlayerJoinListener implements Listener {
 
         p.setWalkSpeed(0.2F);
 
-        CommunityPlugin.getInstance().getCommunityWorld().teleportSilently(p,"spawn");
+        CommunityPlugin.getInstance().getCommunityWorld().teleportSilently(p, "spawn");
 
         p.getInventory().clear();
         p.getInventory().setArmorContents(null);
@@ -40,6 +41,7 @@ public class PlayerJoinListener implements Listener {
         p.setMaxHealth(20);
         p.setHealth(20);
         p.setFoodLevel(20);
+        CommunityPlugin.getInstance().getBackpackManager().setRankBoots(p);
 
         if (p.hasPermission("community.join.vanish")) {
             cp.setVanished(true);

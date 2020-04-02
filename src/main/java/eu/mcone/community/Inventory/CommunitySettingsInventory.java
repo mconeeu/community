@@ -33,13 +33,13 @@ public class CommunitySettingsInventory extends CoreInventory {
 
             });
         }
-        if (CommunityPlugin.getInstance().getBuildSystem().hasBuildModeEnabled(p)) {
-            if (p.hasPermission("system.bukkit.build")) {
-            setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.GRASS, 1, 0).displayName("§a§lBuildmodus aktiviert").lore("§7§oKlicke zum deaktivieren").create(), e -> {
-                p.closeInventory();
-                CommunityPlugin.getInstance().getBuildSystem().changeBuildMode(p);
-            });
-        } else {
+        if (p.hasPermission("community.build")) {
+            if (CommunityPlugin.getInstance().getBuildSystem().hasBuildModeEnabled(p)) {
+                setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.GRASS, 1, 0).displayName("§a§lBuildmodus aktiviert").lore("§7§oKlicke zum deaktivieren").create(), e -> {
+                    p.closeInventory();
+                    CommunityPlugin.getInstance().getBuildSystem().changeBuildMode(p);
+                });
+            } else {
                 setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.GRASS, 1, 0).displayName("§c§lBuildmodus deaktiviert").lore("§7§oKlicke hier zum aktivieren").create(), e -> {
                     p.closeInventory();
                     CommunityPlugin.getInstance().getBuildSystem().changeBuildMode(p);

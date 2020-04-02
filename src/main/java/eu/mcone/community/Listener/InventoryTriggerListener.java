@@ -11,8 +11,13 @@ import eu.mcone.community.Inventory.NavigatorInventory;
 import eu.mcone.community.player.CommunityPlayer;
 import eu.mcone.community.utils.PlayerHider;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.inventory.category.CategoryInventory;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
-import eu.mcone.lobby.api.enums.Category;
+import eu.mcone.gameapi.api.GamePlugin;
+import eu.mcone.gameapi.api.backpack.BackpackItem;
+import eu.mcone.gameapi.api.backpack.BackpackManager;
+import eu.mcone.gameapi.api.backpack.Category;
+import eu.mcone.lobby.api.enums.LobbyCategory;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -42,7 +47,7 @@ public class InventoryTriggerListener implements Listener {
 
             if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lRucksack §8» §7§oZeige deine gesammelten Items an")) {
                 e.setCancelled(true);
-                CommunityPlugin.getInstance().getBackpackManager().openBackpackInventory(Category.STORY_ITEMS.name(), p);
+                CommunityPlugin.getInstance().getBackpackManager().openBackpackInventory(LobbyCategory.STORY_ITEMS.name(), p);
             } else if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde")) {
                 e.setCancelled(true);
                 p.performCommand("profile");

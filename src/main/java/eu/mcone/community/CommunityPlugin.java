@@ -7,11 +7,12 @@ import eu.mcone.coresystem.api.bukkit.world.BuildSystem;
 import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
 import eu.mcone.gameapi.api.GamePlugin;
 import eu.mcone.gameapi.api.Option;
-import eu.mcone.lobby.api.enums.Category;
+import eu.mcone.gameapi.api.backpack.Category;
+import eu.mcone.lobby.api.enums.LobbyCategory;
 import lombok.Getter;
 import org.bukkit.ChatColor;
 
-public class CommunityPlugin extends GamePlugin<CommunityPlayer> {
+public class CommunityPlugin extends GamePlugin {
 
     @Getter
     private static CommunityPlugin instance;
@@ -26,8 +27,7 @@ public class CommunityPlugin extends GamePlugin<CommunityPlayer> {
     }
 
     @Override
-    public void onEnable() {
-
+    public void onGameEnable() {
         instance = this;
         communityWorld = CoreSystem.getInstance().getWorldManager().getWorld("Community");
         CoreSystem.getInstance().getTranslationManager().loadCategories(this);
@@ -47,13 +47,13 @@ public class CommunityPlugin extends GamePlugin<CommunityPlayer> {
                 new PlayerMoveListener()
         );
 
-        getBackpackManager().loadAdditionalCategories(Category.STORY_ITEMS.name());
+        getBackpackManager().loadAdditionalCategories(LobbyCategory.STORY_ITEMS.name());
 
         sendConsoleMessage("§aVersion §f" + this.getDescription().getVersion() + "§a enabled...");
     }
 
     @Override
-    public void onDisable() {
+    public void onGameDisable() {
         sendConsoleMessage("§cPlugin disabled!");
     }
 
