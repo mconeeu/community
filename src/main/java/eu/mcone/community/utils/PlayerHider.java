@@ -24,16 +24,16 @@ public class PlayerHider {
     private static HashMap<String, Long> time = new HashMap<>();
 
     public static void hidePlayers(Player p) {
-        if (time.containsKey(p.getName())){
+        if (time.containsKey(p.getName())) {
             long diff = (System.currentTimeMillis() - time.get(p.getName())) / 10L / 60L;
             int cooldown = 1;
-            if (diff < cooldown){
-                CommunityPlugin.getInstance().getMessager().send(p, "§7Du musst kurz warte um den Player Hider wieder benutzen zu können");
+            if (diff < cooldown) {
+                CommunityPlugin.getInstance().getMessager().send(p, "§7Du musst kurz warte um den Player hider wieder benutzen zu können");
                 return;
             }
         }
 
-        for (Player all : Bukkit.getOnlinePlayers()){
+        for (Player all : Bukkit.getOnlinePlayers()) {
             p.hidePlayer(all);
         }
 
@@ -48,7 +48,7 @@ public class PlayerHider {
     }
 
     public static void showPlayers(Player p) {
-        for (Player all : Bukkit.getOnlinePlayers()){
+        for (Player all : Bukkit.getOnlinePlayers()) {
             p.showPlayer(all);
         }
 

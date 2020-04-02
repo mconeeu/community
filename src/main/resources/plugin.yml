@@ -4,10 +4,11 @@ version: ${project.version}
 main: eu.mcone.community.CommunityPlugin
 depend: [MCONE-BukkitCoreSystem, MCONE-GameAPI]
 softdepend: [NoCheatPlus]
-
 permissions:
-  citybuild:
-    description: Citybuild Main Permission
+  community:
+    description: Community Main Permission
     children:
       community.settings:
         description: change settings
+      community.build:
+        description: build on the community

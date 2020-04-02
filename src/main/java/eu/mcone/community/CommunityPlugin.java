@@ -1,6 +1,7 @@
 package eu.mcone.community;
 
 import eu.mcone.community.Listener.*;
+import eu.mcone.community.commands.CommunityCMD;
 import eu.mcone.community.player.CommunityPlayer;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.world.BuildSystem;
@@ -47,6 +48,10 @@ public class CommunityPlugin extends GamePlugin {
                 new PlayerMoveListener()
         );
 
+
+        registerCommands(
+                new CommunityCMD()
+        );
         getBackpackManager().loadAdditionalCategories(LobbyCategory.STORY_ITEMS.name());
 
         sendConsoleMessage("§aVersion §f" + this.getDescription().getVersion() + "§a enabled...");
