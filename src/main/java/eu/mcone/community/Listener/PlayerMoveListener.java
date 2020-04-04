@@ -1,5 +1,9 @@
 package eu.mcone.community.Listener;
 
+import eu.mcone.community.CommunityPlugin;
+import eu.mcone.lobby.api.LobbyWorld;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,9 +17,47 @@ public class PlayerMoveListener implements Listener {
     public void on(PlayerMoveEvent e) {
         Player p = e.getPlayer();
 
-        for(Player players : InventoryTriggerListener.run.keySet()) {
-            if(!p.hasPermission("community.bypass")) {
-                if(p.getLocation().distance(players.getLocation()) <= 4) {
+
+        //entrance
+        Location buehne1 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("buehen3");
+        Location buehne2 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("buehen4");
+        Location buehne3 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("buehen1");
+        Location buehne4 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("buehen2");
+
+
+        //back stairs
+        Location backStairs1 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("buehne-s2");
+        Location backStairs2 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("buehne-s1");
+
+        if (!p.hasPermission("community.buehne")) {
+            //entrance left
+            if (p.getLocation().distance(buehne1) <= 2 ||
+                    p.getLocation().distance(buehne2) <= 2) {
+
+                Vector v1 = p.getLocation().getDirection().multiply(0.8).setX(0.7);
+                p.setVelocity(v1);
+            } else if (
+                //right
+                    p.getLocation().distance(buehne3) <= 2 ||
+                            p.getLocation().distance(buehne4) <= 2) {
+
+                Vector v1 = p.getLocation().getDirection().multiply(0.8).setX(-0.7);
+                p.setVelocity(v1);
+            }
+            //entrance backstairs
+            if (p.getLocation().distance(backStairs1) <= 2 ||
+                    p.getLocation().distance(backStairs2) <= 2) {
+
+                Vector v1 = p.getLocation().getDirection().multiply(0.8).setZ(-0.7);
+                p.setVelocity(v1);
+            }
+
+
+        }
+
+        for (Player players : InventoryTriggerListener.run.keySet()) {
+            if (!p.hasPermission("community.bypass")) {
+                if (p.getLocation().distance(players.getLocation()) <= 4) {
 
                     double Ax = p.getLocation().getX();
                     double Ay = p.getLocation().getY();
@@ -34,12 +76,12 @@ public class PlayerMoveListener implements Listener {
                 }
             }
         }
-        if(InventoryTriggerListener.run.containsKey(p)) {
-            for(Entity entity : p.getNearbyEntities(4, 4, 4)) {
-                if(entity instanceof Player) {
+        if (InventoryTriggerListener.run.containsKey(p)) {
+            for (Entity entity : p.getNearbyEntities(4, 4, 4)) {
+                if (entity instanceof Player) {
                     Player target = (Player) entity;
-                    if(p != target) {
-                        if(!target.hasPermission("community.bypass")) {
+                    if (p != target) {
+                        if (!target.hasPermission("community.bypass")) {
 
                             double Ax = p.getLocation().getX();
                             double Ay = p.getLocation().getY();
@@ -61,5 +103,5 @@ public class PlayerMoveListener implements Listener {
             }
         }
 
-        }
     }
+}

@@ -2,6 +2,7 @@ package eu.mcone.community;
 
 import eu.mcone.community.Listener.*;
 import eu.mcone.community.commands.CommunityCMD;
+import eu.mcone.community.commands.EffectCMD;
 import eu.mcone.community.player.CommunityPlayer;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.world.BuildSystem;
@@ -19,6 +20,9 @@ public class CommunityPlugin extends GamePlugin {
     private static CommunityPlugin instance;
 
     @Getter
+    private static CommunityPlugin system;
+
+    @Getter
     private BuildSystem buildSystem;
     @Getter
     private CoreWorld communityWorld;
@@ -30,6 +34,7 @@ public class CommunityPlugin extends GamePlugin {
     @Override
     public void onGameEnable() {
         instance = this;
+        system = this;
         communityWorld = CoreSystem.getInstance().getWorldManager().getWorld("Community");
         CoreSystem.getInstance().getTranslationManager().loadCategories(this);
         CoreSystem.getInstance().enableSpawnCommand(this, communityWorld, 0);
@@ -45,12 +50,14 @@ public class CommunityPlugin extends GamePlugin {
                 new WeatherChangeListener(),
                 new EntitiyDamageListener(),
                 new PlayerQuitListener(),
-                new PlayerMoveListener()
+                new PlayerMoveListener(),
+                new VanishListener()
         );
 
 
         registerCommands(
-                new CommunityCMD()
+                new CommunityCMD(),
+                new EffectCMD()
         );
         getBackpackManager().loadAdditionalCategories(LobbyCategory.STORY_ITEMS.name());
 
