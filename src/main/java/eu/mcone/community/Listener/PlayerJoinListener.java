@@ -51,10 +51,12 @@ public class PlayerJoinListener implements Listener {
         p.getInventory().setItem(8, new Skull(p.getName(), 1).toItemBuilder().displayName("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde").create());
         p.getInventory().setItem(7, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus").create());
 
-        if (p.hasPermission("community.settings") || p.getName().equalsIgnoreCase("DrMarv")) {
+        if (p.hasPermission("community.settings")) {
             p.getInventory().setItem(6, new ItemBuilder(Material.REDSTONE_COMPARATOR, 1, 0).displayName("§3§lCommunity Einstellungen §8» §7§oBearbeite Team einstellungen").create());
         }
-        if (p.hasPermission("community.protective.shield") || p.getName().equalsIgnoreCase("DrMarv")) {
+
+        //only admin or HIGH RANK HIGH!!
+        if (p.hasPermission("community.protective.shield.admin")) {
             p.getInventory().setItem(5, new ItemBuilder(Material.EYE_OF_ENDER, 1, 0).displayName("§3§lSchutzschild §8» §7§oSchleuder Spieler weg").create());
         }
 

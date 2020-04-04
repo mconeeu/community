@@ -18,6 +18,10 @@ public class EffectManager {
         if (fire) {
             fireShedular = Bukkit.getScheduler().scheduleSyncRepeatingTask(CommunityPlugin.getSystem(), () -> {
                 for (Player all : Bukkit.getOnlinePlayers()) {
+                    if (Bukkit.getOnlinePlayers().size() == 0) {
+                        cancelAllTask();
+                        return;
+                    }
                     all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("fire1"), Effect.LAVA_POP, 100, 1, 1, 1, 1, 3, 15, 20);
                     all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("fire2"), Effect.LAVA_POP, 100, 1, 1, 1, 1, 3, 15, 20);
                     all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("fire3"), Effect.LAVA_POP, 100, 1, 1, 1, 1, 3, 15, 20);
@@ -46,10 +50,14 @@ public class EffectManager {
         if (smoke) {
             smokeShedular = Bukkit.getScheduler().scheduleSyncRepeatingTask(CommunityPlugin.getSystem(), () -> {
                 for (Player all : Bukkit.getOnlinePlayers()) {
-                    all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("smoke2"), Effect.EXPLOSION, 100, 10, 5, 5, 5, 1, 45, 25);
-                    all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("smoke1"), Effect.EXPLOSION, 100, 10, 5, 5, 5, 1, 45, 25);
-                    all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("smoke3"), Effect.EXPLOSION, 100, 10, 5, 5, 5, 1, 45, 25);
-                    all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("smoke4"), Effect.EXPLOSION, 100, 10, 5, 5, 5, 1, 45, 25);
+                    if (Bukkit.getOnlinePlayers().size() == 0) {
+                        cancelAllTask();
+                        return;
+                    }
+                    all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("smoke2"), Effect.EXPLOSION, 100, 10, 5, 5, 5, 1, 35, 25);
+                    all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("smoke1"), Effect.EXPLOSION, 100, 10, 5, 5, 5, 1, 35, 25);
+                    all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("smoke3"), Effect.EXPLOSION, 100, 10, 5, 5, 5, 1, 35, 25);
+                    all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("smoke4"), Effect.EXPLOSION, 100, 10, 5, 5, 5, 1, 35, 25);
                 }
             }, 1, 2);
         }

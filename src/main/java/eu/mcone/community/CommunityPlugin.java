@@ -3,6 +3,7 @@ package eu.mcone.community;
 import eu.mcone.community.Listener.*;
 import eu.mcone.community.commands.CommunityCMD;
 import eu.mcone.community.commands.EffectCMD;
+import eu.mcone.community.commands.FreeEntrance;
 import eu.mcone.community.player.CommunityPlayer;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.world.BuildSystem;
@@ -51,13 +52,15 @@ public class CommunityPlugin extends GamePlugin {
                 new EntitiyDamageListener(),
                 new PlayerQuitListener(),
                 new PlayerMoveListener(),
-                new VanishListener()
+                new VanishListener(),
+                new NpcInteractListener()
         );
 
 
         registerCommands(
                 new CommunityCMD(),
-                new EffectCMD()
+                new EffectCMD(),
+                new FreeEntrance()
         );
         getBackpackManager().loadAdditionalCategories(LobbyCategory.STORY_ITEMS.name());
 
