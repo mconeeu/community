@@ -19,7 +19,6 @@ public class TraderInventory extends CoreInventory {
         GamePlayer gamePlayer = CommunityPlugin.getInstance().getGamePlayer(p);
         CorePlayer corePlayer = CoreSystem.getInstance().getCorePlayer(p);
 
-
         setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.PAPER, 1, 0).displayName("§fFestival Eintrittskarte").lore("§615 Coins", "", "§fGültig bis 2022").create(), e -> {
             if (p.hasPermission("community.bypass.entrance")) {
                 CommunityPlugin.getInstance().getMessager().send(p, "§cDu brauchst kein Festival Ticket!");
