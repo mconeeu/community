@@ -62,7 +62,7 @@ public class CommunitySettingsInventory extends CoreInventory {
         if (p.hasPermission("community.effectmenu")) {
             setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.FIREWORK_CHARGE, 1, 0).displayName("§a§lBühnen Effekte").lore("§7§oKlicke zum bearbeiten").create(), e -> {
                 p.closeInventory();
-                new EffectInventory(p);
+                new EffectMainInventory(p);
             });
         }
 

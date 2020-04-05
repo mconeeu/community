@@ -1,15 +1,10 @@
 package eu.mcone.community.Listener;
 
 import eu.mcone.community.CommunityPlugin;
-import eu.mcone.community.commands.FreeEntrance;
-import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
+import eu.mcone.community.commands.FreeEntranceCMD;
 import eu.mcone.gameapi.api.backpack.defaults.DefaultItem;
 import eu.mcone.gameapi.api.player.GamePlayer;
-import eu.mcone.lobby.api.LobbyWorld;
-import eu.mcone.lobby.api.enums.LobbyItem;
 import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -47,6 +42,24 @@ public class PlayerMoveListener implements Listener {
         Location back2 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("buehne-p2");
         Location back3 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("buehne-p3");
 
+        //premium buehne
+        Location premiumBuehne1 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("pbuehne-1");
+        Location premiumBuehne2 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("pbuehne-2");
+        Location premiumBuehne3 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("pbuehne-3");
+
+
+        //backstage
+        if (!p.hasPermission("community.premium.buehne")) {
+            if (
+                    p.getLocation().distance(premiumBuehne1) <= 2 ||
+                            p.getLocation().distance(premiumBuehne2) <= 2 ||
+                            p.getLocation().distance(premiumBuehne3) <= 2) {
+
+                Vector v1 = p.getLocation().getDirection().multiply(0.8).setX(0.7);
+                p.setVelocity(v1);
+
+            }
+        }
 
         if (!p.hasPermission("community.buehne")) {
             //entrance left
@@ -71,13 +84,14 @@ public class PlayerMoveListener implements Listener {
                 p.setVelocity(v1);
             }
             //entrance backstage big
-        } else if (!p.hasPermission("community.backstage") || !p.hasPermission("community.buehne")) {
+        }
+        if (!p.hasPermission("community.backstage") || !p.hasPermission("community.buehne")) {
             if (
                     p.getLocation().distance(back1) <= 2 ||
                             p.getLocation().distance(back2) <= 2 ||
                             p.getLocation().distance(back3) <= 2) {
 
-                Vector v1 = p.getLocation().getDirection().multiply(0.8).setZ(-0.7);
+                Vector v1 = p.getLocation().getDirection().multiply(0.8).setX(-0.7);
                 p.setVelocity(v1);
 
             }
@@ -97,7 +111,7 @@ public class PlayerMoveListener implements Listener {
                 return;
             }
 
-            if (FreeEntrance.freeEntrance) {
+            if (FreeEntranceCMD.freeEntrance) {
                 return;
             }
             if (!gamePlayer.hasDefaultItem(DefaultItem.FESTIVAL_ENTRANCE)) {

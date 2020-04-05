@@ -1,6 +1,7 @@
 package eu.mcone.community.utils;
 
 import eu.mcone.community.CommunityPlugin;
+import net.minecraft.server.v1_8_R3.EnumParticle;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.entity.Player;
@@ -8,11 +9,107 @@ import org.bukkit.scheduler.BukkitTask;
 
 public class EffectManager {
 
+    private static boolean firePremium = false;
+    public static int fireShedularPremium;
+
+    private static boolean white = false;
+    public static int whiteShedular;
+
     private static boolean fire = false;
     public static int fireShedular;
 
     private static boolean smoke = false;
     public static int smokeShedular;
+
+
+    private static void setWhite() {
+        if (white) {
+            whiteShedular = Bukkit.getScheduler().scheduleSyncRepeatingTask(CommunityPlugin.getSystem(), () -> {
+                for (Player all : Bukkit.getOnlinePlayers()) {
+                    if (Bukkit.getOnlinePlayers().size() == 0) {
+                        cancelAllTask();
+                        return;
+                    }
+
+                    Particle particle1 = new Particle(EnumParticle.SNOWBALL, CommunityPlugin.getInstance().getCommunityWorld().getLocation("white-1"), 1, 1, 2, 1, 25);
+                    Particle particle2 = new Particle(EnumParticle.SNOWBALL, CommunityPlugin.getInstance().getCommunityWorld().getLocation("white-2"), 1, 1, 2, 1, 25);
+                    Particle particle3 = new Particle(EnumParticle.SNOWBALL, CommunityPlugin.getInstance().getCommunityWorld().getLocation("white-3"), 1, 1, 2, 1, 25);
+                    Particle particle4 = new Particle(EnumParticle.SNOWBALL, CommunityPlugin.getInstance().getCommunityWorld().getLocation("white-4"), 1, 1, 2, 1, 25);
+                    Particle particle5 = new Particle(EnumParticle.SNOWBALL, CommunityPlugin.getInstance().getCommunityWorld().getLocation("white-5"), 1, 1, 2, 1, 25);
+                    Particle particle6 = new Particle(EnumParticle.SNOWBALL, CommunityPlugin.getInstance().getCommunityWorld().getLocation("white-6"), 1, 1, 2, 1, 25);
+                    Particle particle7 = new Particle(EnumParticle.SNOWBALL, CommunityPlugin.getInstance().getCommunityWorld().getLocation("white-7"), 1, 1, 2, 1, 25);
+
+
+                    particle1.sendToAll(all);
+                    particle2.sendToAll(all);
+                    particle3.sendToAll(all);
+                    particle4.sendToAll(all);
+                    particle5.sendToAll(all);
+                    particle6.sendToAll(all);
+                    particle7.sendToAll(all);
+
+
+
+                /*    all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("white-1"), Effect.CRIT, 20, 1, 1, 1, 2, 2, 5, 20);
+                    all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("white-2"), Effect.CRIT, 20, 1, 1, 1, 2, 2, 5, 20);
+                    all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("white-3"), Effect.CRIT, 20, 1, 1, 1, 2, 2, 5, 20);
+                    all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("white-4"), Effect.CRIT, 20, 1, 1, 1, 2, 2, 5, 20);
+                    all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("white-5"), Effect.CRIT, 20, 1, 1, 1, 2, 2, 5, 20);
+                    all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("white-6"), Effect.CRIT, 20, 1, 1, 1, 2, 2, 5, 20);
+                    all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("white-7"), Effect.CRIT, 20, 1, 1, 1, 2, 2, 5, 20);
+
+              */
+                }
+            }, 1, 2);
+        }
+    }
+
+    public static void setWhiteTrue() {
+        white = true;
+        setWhite();
+    }
+
+    public static void setWhiteFalse() {
+        white = false;
+        Bukkit.getScheduler().cancelTask(whiteShedular);
+    }
+
+    public static boolean isWhite() {
+        return white;
+    }
+
+    //
+
+    private static void setFirePremiumEffect() {
+        if (firePremium) {
+            fireShedularPremium = Bukkit.getScheduler().scheduleSyncRepeatingTask(CommunityPlugin.getSystem(), () -> {
+                for (Player all : Bukkit.getOnlinePlayers()) {
+                    if (Bukkit.getOnlinePlayers().size() == 0) {
+                        cancelAllTask();
+                        return;
+                    }
+                    all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("firePremium1"), Effect.LAVA_POP, 50, 1, 1, 2, 1, 2, 5, 20);
+                    all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("firePremium2"), Effect.LAVA_POP, 50, 1, 1, 2, 1, 2, 5, 20);
+                }
+            }, 1, 2);
+        }
+    }
+
+    public static void setFirePremiumTrue() {
+        firePremium = true;
+        setFirePremiumEffect();
+    }
+
+    public static void setFirePremiumFalse() {
+        firePremium = false;
+        Bukkit.getScheduler().cancelTask(fireShedularPremium);
+    }
+
+    public static boolean isFirePremium() {
+        return firePremium;
+    }
+
+    //////
 
     private static void setFireEffect() {
         if (fire) {
@@ -22,10 +119,27 @@ public class EffectManager {
                         cancelAllTask();
                         return;
                     }
-                    all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("fire1"), Effect.LAVA_POP, 100, 1, 1, 1, 1, 3, 15, 20);
+                    Particle particle1 = new Particle(EnumParticle.LAVA, CommunityPlugin.getInstance().getCommunityWorld().getLocation("fire1"), 1, 2, 1, 1, 15);
+                    Particle particle2 = new Particle(EnumParticle.LAVA, CommunityPlugin.getInstance().getCommunityWorld().getLocation("fire2"), 1, 2, 1, 1, 15);
+                    Particle particle3 = new Particle(EnumParticle.LAVA, CommunityPlugin.getInstance().getCommunityWorld().getLocation("fire4"), 1, 2, 1, 1, 15);
+                    Particle particle4 = new Particle(EnumParticle.LAVA, CommunityPlugin.getInstance().getCommunityWorld().getLocation("fire3"), 1, 2, 1, 1, 15);
+
+
+                    particle1.sendToAll(all);
+                    particle2.sendToAll(all);
+                    particle3.sendToAll(all);
+                    particle4.sendToAll(all);
+
+                /*    all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("fire1"), Effect.LAVA_POP, 100, 1, 1, 1, 1, 3, 15, 20);
                     all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("fire2"), Effect.LAVA_POP, 100, 1, 1, 1, 1, 3, 15, 20);
                     all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("fire3"), Effect.LAVA_POP, 100, 1, 1, 1, 1, 3, 15, 20);
                     all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("fire4"), Effect.LAVA_POP, 100, 1, 1, 1, 1, 3, 15, 20);
+
+
+
+                 */
+
+
                 }
             }, 1, 2);
         }
@@ -44,6 +158,9 @@ public class EffectManager {
     public static boolean isFire() {
         return fire;
     }
+
+
+    ///////////
 
 
     private static void setSmokeEffect() {

@@ -8,9 +8,9 @@ import eu.mcone.gameapi.api.player.GamePlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-public class FreeEntrance extends CorePlayerCommand {
+public class FreeEntranceCMD extends CorePlayerCommand {
 
-    public FreeEntrance() {
+    public FreeEntranceCMD() {
         super("FreeEntrance");
     }
 

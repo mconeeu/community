@@ -3,14 +3,12 @@ package eu.mcone.community;
 import eu.mcone.community.Listener.*;
 import eu.mcone.community.commands.CommunityCMD;
 import eu.mcone.community.commands.EffectCMD;
-import eu.mcone.community.commands.FreeEntrance;
-import eu.mcone.community.player.CommunityPlayer;
+import eu.mcone.community.commands.FreeEntranceCMD;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.world.BuildSystem;
 import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
 import eu.mcone.gameapi.api.GamePlugin;
 import eu.mcone.gameapi.api.Option;
-import eu.mcone.gameapi.api.backpack.Category;
 import eu.mcone.lobby.api.enums.LobbyCategory;
 import lombok.Getter;
 import org.bukkit.ChatColor;
@@ -60,7 +58,7 @@ public class CommunityPlugin extends GamePlugin {
         registerCommands(
                 new CommunityCMD(),
                 new EffectCMD(),
-                new FreeEntrance()
+                new FreeEntranceCMD()
         );
         getBackpackManager().loadAdditionalCategories(LobbyCategory.STORY_ITEMS.name());
 

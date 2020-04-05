@@ -7,22 +7,16 @@ package eu.mcone.community.Listener;
 
 import eu.mcone.community.CommunityPlugin;
 import eu.mcone.community.Inventory.CommunitySettingsInventory;
-import eu.mcone.community.Inventory.EffectInventory;
+import eu.mcone.community.Inventory.EffectMainInventory;
+import eu.mcone.community.Inventory.EffectPremiumInventory;
 import eu.mcone.community.Inventory.NavigatorInventory;
-import eu.mcone.community.player.CommunityPlayer;
 import eu.mcone.community.utils.PlayerHider;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
-import eu.mcone.coresystem.api.bukkit.inventory.category.CategoryInventory;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
-import eu.mcone.gameapi.api.GamePlugin;
-import eu.mcone.gameapi.api.backpack.BackpackItem;
-import eu.mcone.gameapi.api.backpack.BackpackManager;
-import eu.mcone.gameapi.api.backpack.Category;
 import eu.mcone.lobby.api.enums.LobbyCategory;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.Sound;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -31,8 +25,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import javax.swing.*;
-import java.awt.*;
 import java.util.HashMap;
 
 public class InventoryTriggerListener implements Listener {
@@ -51,7 +43,17 @@ public class InventoryTriggerListener implements Listener {
                 if (clicked == Material.STONE_BUTTON) {
                     if (CommunityPlugin.getInstance().getCommunityWorld().getBlockLocation("effect").equals(e.getClickedBlock().getLocation())) {
                         if (p.hasPermission("community.effectmenu")) {
-                            new EffectInventory(p);
+                            new EffectMainInventory(p);
+                        } else {
+                            CommunityPlugin.getInstance().getMessager().send(p, "§4Du hast dafür keine Berechtigung!");
+                        }
+                    }
+                }
+
+                if (clicked == Material.STONE_BUTTON) {
+                    if (CommunityPlugin.getInstance().getCommunityWorld().getBlockLocation("effect-premium").equals(e.getClickedBlock().getLocation())) {
+                        if (p.hasPermission("community.premium.effectmenu")) {
+                            new EffectPremiumInventory(p);
                         } else {
                             CommunityPlugin.getInstance().getMessager().send(p, "§4Du hast dafür keine Berechtigung!");
                         }

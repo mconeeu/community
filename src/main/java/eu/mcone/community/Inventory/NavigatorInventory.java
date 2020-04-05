@@ -1,7 +1,7 @@
 package eu.mcone.community.Inventory;
 
 import eu.mcone.community.CommunityPlugin;
-import eu.mcone.community.commands.FreeEntrance;
+import eu.mcone.community.commands.FreeEntranceCMD;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
@@ -22,7 +22,7 @@ public class NavigatorInventory extends CoreInventory {
         GamePlayer gamePlayer = CommunityPlugin.getInstance().getGamePlayer(p);
 
 
-        if (p.hasPermission("community.bypass.entrance") || gamePlayer.hasDefaultItem(DefaultItem.FESTIVAL_ENTRANCE) || FreeEntrance.freeEntrance) {
+        if (p.hasPermission("community.bypass.entrance") || gamePlayer.hasDefaultItem(DefaultItem.FESTIVAL_ENTRANCE) || FreeEntranceCMD.freeEntrance) {
             setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.FIREWORK_CHARGE, 1, 0).displayName("§b§lBühne").lore("§7§oKlicke zum Telepotieren").create(), e -> {
                 CommunityPlugin.getInstance().getCommunityWorld().teleportSilently(p, "buehne");
                 p.closeInventory();
