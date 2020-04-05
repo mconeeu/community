@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 public class EffectPremiumInventory extends CoreInventory {
 
     public EffectPremiumInventory(Player player) {
-        super("§f§lBühne", player, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
+        super("§f§lPremium Stage", player, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(player);
 
 
