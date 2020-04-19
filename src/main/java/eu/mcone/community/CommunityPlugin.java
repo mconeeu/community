@@ -35,7 +35,6 @@ public class CommunityPlugin extends GamePlugin {
         instance = this;
         system = this;
         communityWorld = CoreSystem.getInstance().getWorldManager().getWorld("Community");
-        CoreSystem.getInstance().getTranslationManager().loadCategories(this);
         CoreSystem.getInstance().enableSpawnCommand(this, communityWorld, 0);
 
         buildSystem = CoreSystem.getInstance().initialiseBuildSystem(BuildSystem.BuildEvent.BLOCK_BREAK, BuildSystem.BuildEvent.BLOCK_PLACE, BuildSystem.BuildEvent.INTERACT);
