@@ -62,11 +62,10 @@ public class PlayerHider {
         time.put(p.getName(), System.currentTimeMillis());
     }
 
-    public static void playerJoined(Player j) {
-        for (Player p : Bukkit.getOnlinePlayers()) {
-            if (PlayerHider.players.contains(j)) {
-                j.hidePlayer(p);
-            }
+
+    public static void updateHider(Player p) {
+        for (Player isVanish : players) {
+            isVanish.hidePlayer(p);
         }
     }
 

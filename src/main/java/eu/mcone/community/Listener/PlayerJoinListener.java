@@ -6,11 +6,13 @@
 package eu.mcone.community.Listener;
 
 import eu.mcone.community.CommunityPlugin;
+import eu.mcone.community.utils.PlayerHider;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -30,6 +32,10 @@ public class PlayerJoinListener implements Listener {
         p.playEffect(p.getLocation(), org.bukkit.Effect.HAPPY_VILLAGER, 5);
 
         p.setWalkSpeed(0.2F);
+
+        Bukkit.getScheduler().runTaskLater(CommunityPlugin.getSystem(), () -> {
+            PlayerHider.updateHider(p);
+        }, 1);
 
         CommunityPlugin.getInstance().getCommunityWorld().teleportSilently(p, "spawn");
 
