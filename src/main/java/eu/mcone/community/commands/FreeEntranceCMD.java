@@ -24,17 +24,17 @@ public class FreeEntranceCMD extends CorePlayerCommand {
                 if (args[0].equalsIgnoreCase("on")) {
                     if (!freeEntrance) {
                         freeEntrance = true;
-                        CommunityPlugin.getInstance().getMessager().send(player, "§aDer Eintritt ist nun für jeden gratis!");
+                        CommunityPlugin.getInstance().getMessenger().send(player, "§aDer Eintritt ist nun für jeden gratis!");
 
                         for (GamePlayer gamePlayer : CommunityPlugin.getInstance().getOnlineGamePlayers()) {
                             if (!gamePlayer.bukkit().hasPermission("community.bypass.entrance")) {
                                 if (!gamePlayer.hasDefaultItem(DefaultItem.FESTIVAL_ENTRANCE)) {
-                                    CommunityPlugin.getInstance().getMessager().send(gamePlayer.bukkit(), "§aDer Festival Eintritt ist nun gratis!");
+                                    CommunityPlugin.getInstance().getMessenger().send(gamePlayer.bukkit(), "§aDer Festival Eintritt ist nun gratis!");
                                 }
                             }
                         }
                     } else {
-                        CommunityPlugin.getInstance().getMessager().send(player, "§4Der Eintritt ist bereits für jeden gratis!");
+                        CommunityPlugin.getInstance().getMessenger().send(player, "§4Der Eintritt ist bereits für jeden gratis!");
                     }
 
                 } else if (args[0].equalsIgnoreCase("off")) {
@@ -42,27 +42,27 @@ public class FreeEntranceCMD extends CorePlayerCommand {
                         freeEntrance = false;
 
                         player.closeInventory();
-                        CommunityPlugin.getInstance().getMessager().send(player, "§aDer Eintritt ist nun nicht mehr für jeden gratis!");
+                        CommunityPlugin.getInstance().getMessenger().send(player, "§aDer Eintritt ist nun nicht mehr für jeden gratis!");
 
                         for (GamePlayer gamePlayer : CommunityPlugin.getInstance().getOnlineGamePlayers()) {
                             if (!gamePlayer.bukkit().hasPermission("community.bypass.entrance")) {
                                 if (!gamePlayer.hasDefaultItem(DefaultItem.FESTIVAL_ENTRANCE)) {
-                                    CommunityPlugin.getInstance().getMessager().send(gamePlayer.bukkit(), "§4Der Festival Eintritt ist nun nicht mehr gratis, und du wurdest rausgeschmissen!");
+                                    CommunityPlugin.getInstance().getMessenger().send(gamePlayer.bukkit(), "§4Der Festival Eintritt ist nun nicht mehr gratis, und du wurdest rausgeschmissen!");
                                     CommunityPlugin.getInstance().getCommunityWorld().teleportSilently(gamePlayer.bukkit(), "entrance-out");
                                 }
                             }
                         }
                     } else {
-                        CommunityPlugin.getInstance().getMessager().send(player, "§4Der Festival gratis Eintritt ist bereits deaktivert!");
+                        CommunityPlugin.getInstance().getMessenger().send(player, "§4Der Festival gratis Eintritt ist bereits deaktivert!");
                     }
 
 
                 }
             } else {
-                CommunityPlugin.getInstance().getMessager().send(player, "§4Bitte benutze; §c/freeentrance [<on/off>]");
+                CommunityPlugin.getInstance().getMessenger().send(player, "§4Bitte benutze; §c/freeentrance [<on/off>]");
             }
         } else {
-            CommunityPlugin.getInstance().getMessager().send(player, "§4Du hast keine Berechtingung für diesen Befehl!");
+            CommunityPlugin.getInstance().getMessenger().send(player, "§4Du hast keine Berechtingung für diesen Befehl!");
         }
 
         return false;

@@ -45,7 +45,7 @@ public class InventoryTriggerListener implements Listener {
                         if (p.hasPermission("community.effectmenu")) {
                             new EffectMainInventory(p);
                         } else {
-                            CommunityPlugin.getInstance().getMessager().send(p, "§4Du hast dafür keine Berechtigung!");
+                            CommunityPlugin.getInstance().getMessenger().send(p, "§4Du hast dafür keine Berechtigung!");
                         }
                     }
                 }
@@ -55,7 +55,7 @@ public class InventoryTriggerListener implements Listener {
                         if (p.hasPermission("community.premium.effectmenu")) {
                             new EffectPremiumInventory(p);
                         } else {
-                            CommunityPlugin.getInstance().getMessager().send(p, "§4Du hast dafür keine Berechtigung!");
+                            CommunityPlugin.getInstance().getMessenger().send(p, "§4Du hast dafür keine Berechtigung!");
                         }
                     }
                 }
@@ -93,7 +93,7 @@ public class InventoryTriggerListener implements Listener {
                     if (!cp.isVanished()) {
                         e.setCancelled(true);
                         if (run.containsKey(p)) {
-                            CommunityPlugin.getInstance().getMessager().send(p, "§cDas Schutzschild wurde deaktiviert");
+                            CommunityPlugin.getInstance().getMessenger().send(p, "§cDas Schutzschild wurde deaktiviert");
                             p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 2F, 0.5F);
                             run.get(p).cancel();
                             run.remove(p);
@@ -110,7 +110,7 @@ public class InventoryTriggerListener implements Listener {
 
                             });
                             run.get(p).runTaskTimer(CommunityPlugin.getInstance(), 20, 20);
-                            CommunityPlugin.getInstance().getMessager().send(p, "§aDas Schutzschild wurde aktiviert");
+                            CommunityPlugin.getInstance().getMessenger().send(p, "§aDas Schutzschild wurde aktiviert");
                             p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 2F, 1F);
                         }
                     } else {
@@ -118,7 +118,7 @@ public class InventoryTriggerListener implements Listener {
                             run.get(p).cancel();
                             run.remove(p);
                         }
-                        CommunityPlugin.getInstance().getMessager().send(p, "§4Du darfst im Vanish Modus das Schutzschild nicht benutzen!");
+                        CommunityPlugin.getInstance().getMessenger().send(p, "§4Du darfst im Vanish Modus das Schutzschild nicht benutzen!");
                     }
 
                 }

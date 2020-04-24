@@ -26,12 +26,12 @@ public class NavigatorInventory extends CoreInventory {
             setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.FIREWORK_CHARGE, 1, 0).displayName("§b§lBühne").lore("§7§oKlicke zum Telepotieren").create(), e -> {
                 CommunityPlugin.getInstance().getCommunityWorld().teleportSilently(p, "buehne");
                 p.closeInventory();
-                CommunityPlugin.getInstance().getMessager().send(p, "§aDu bist nun bei der Bühne!");
+                CommunityPlugin.getInstance().getMessenger().send(p, "§aDu bist nun bei der Bühne!");
             });
         } else {
             setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.FIREWORK_CHARGE, 1, 0).displayName("§b§lTicket Eingang").lore("§7§oKlicke zum Telepotieren").create(), e -> {
                 p.closeInventory();
-                CommunityPlugin.getInstance().getMessager().send(p, "§aDu bist nun beim Ticket Eingang!");
+                CommunityPlugin.getInstance().getMessenger().send(p, "§aDu bist nun beim Ticket Eingang!");
                 CommunityPlugin.getInstance().getCommunityWorld().teleportSilently(p, "entrance-out");
             });
         }
@@ -39,7 +39,7 @@ public class NavigatorInventory extends CoreInventory {
         setItem(InventorySlot.ROW_2_SLOT_7, new ItemBuilder(Material.NETHER_STAR, 1, 0).displayName("§b§lSpawn").lore("§7§oKlicke zum Telepotieren").create(), e -> {
             CommunityPlugin.getInstance().getCommunityWorld().teleportSilently(p, "spawn");
             p.closeInventory();
-            CommunityPlugin.getInstance().getMessager().send(p, "§aDu bist nun beim Spawn!");
+            CommunityPlugin.getInstance().getMessenger().send(p, "§aDu bist nun beim Spawn!");
         });
 
         openInventory();

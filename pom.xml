@@ -65,13 +65,13 @@
         <dependency>
             <groupId>eu.mcone.coresystem</groupId>
             <artifactId>bukkit-api</artifactId>
-            <version>10.6.1-SNAPSHOT</version>
+            <version>10.6.3-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>eu.mcone.gameapi</groupId>
             <artifactId>api</artifactId>
-            <version>3.3.3-SNAPSHOT</version>
+            <version>3.3.4-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

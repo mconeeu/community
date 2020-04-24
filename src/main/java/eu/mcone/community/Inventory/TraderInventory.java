@@ -21,17 +21,17 @@ public class TraderInventory extends CoreInventory {
 
         setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.PAPER, 1, 0).displayName("§fFestival Eintrittskarte").lore("§615 Coins", "", "§fGültig bis 2022").create(), e -> {
             if (p.hasPermission("community.bypass.entrance")) {
-                CommunityPlugin.getInstance().getMessager().send(p, "§cDu brauchst kein Festival Ticket!");
+                CommunityPlugin.getInstance().getMessenger().send(p, "§cDu brauchst kein Festival Ticket!");
                 return;
             } else if (gamePlayer.hasDefaultItem(DefaultItem.FESTIVAL_ENTRANCE)) {
-                CommunityPlugin.getInstance().getMessager().send(p, "§cDu hast die Eintrittskarte bereits!");
+                CommunityPlugin.getInstance().getMessenger().send(p, "§cDu hast die Eintrittskarte bereits!");
                 return;
             } else if (corePlayer.getCoins() >= 15) {
-                CommunityPlugin.getInstance().getMessager().send(p, "§aDu hast dir erfolgreich die Festival Eintrittskarte gekauft!");
+                CommunityPlugin.getInstance().getMessenger().send(p, "§aDu hast dir erfolgreich die Festival Eintrittskarte gekauft!");
                 gamePlayer.addDefaultItem(DefaultItem.FESTIVAL_ENTRANCE);
                 corePlayer.removeCoins(15);
             } else {
-                CommunityPlugin.getInstance().getMessager().send(p, "§cDu hast nicht genügend Coins!");
+                CommunityPlugin.getInstance().getMessenger().send(p, "§cDu hast nicht genügend Coins!");
             }
 
 
