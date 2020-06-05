@@ -117,7 +117,7 @@ public class PlayerMoveListener implements Listener {
             if (!gamePlayer.hasDefaultItem(DefaultItem.FESTIVAL_ENTRANCE)) {
                 Vector v1 = p.getLocation().getDirection().multiply(0.8).setZ(0.6);
                 p.setVelocity(v1);
-                CommunityPlugin.getInstance().getMessager().send(p, "§cDu darfst in diesen Bereich nur mit Eintrittskarte, kaufe sie dir beim Händler!");
+                CommunityPlugin.getInstance().getMessenger().send(p, "§cDu darfst in diesen Bereich nur mit Eintrittskarte, kaufe sie dir beim Händler!");
             }
 
         }

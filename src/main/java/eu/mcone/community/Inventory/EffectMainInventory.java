@@ -25,7 +25,7 @@ public class EffectMainInventory extends CoreInventory {
         if (!EffectManager.isFire()) {
             setItem(InventorySlot.ROW_2_SLOT_2, new ItemBuilder(Material.FIREWORK_CHARGE, 1, 0).displayName("§c§lFire deaktiviert").lore("§7§oKlicke hier zum aktivieren").create(), e -> {
                 player.closeInventory();
-                CommunityPlugin.getInstance().getMessager().send(player, "§cBühnen Feuereffekte an");
+                CommunityPlugin.getInstance().getMessenger().send(player, "§cBühnen Feuereffekte an");
                 EffectManager.setFireTrue();
 
             });
@@ -33,7 +33,7 @@ public class EffectMainInventory extends CoreInventory {
             setItem(InventorySlot.ROW_2_SLOT_2, new ItemBuilder(Material.FIREWORK_CHARGE, 1, 0).displayName("§a§lFire aktiviert").lore("§7§oKlicke zum deaktivieren").create(), e -> {
                 player.closeInventory();
                 EffectManager.setFireFalse();
-                CommunityPlugin.getInstance().getMessager().send(player, "§cBühnen Feuereffekte aus");
+                CommunityPlugin.getInstance().getMessenger().send(player, "§cBühnen Feuereffekte aus");
             });
         }
 
@@ -41,7 +41,7 @@ public class EffectMainInventory extends CoreInventory {
         if (!EffectManager.isSmoke()) {
             setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.FIREWORK, 1, 0).displayName("§c§lKonfetti deaktiviert").lore("§7§oKlicke hier zum aktivieren").create(), e -> {
                 player.closeInventory();
-                CommunityPlugin.getInstance().getMessager().send(player, "§cBühnen Konfetti an");
+                CommunityPlugin.getInstance().getMessenger().send(player, "§cBühnen Konfetti an");
                 EffectManager.setSmokeTrue();
 
             });
@@ -49,14 +49,14 @@ public class EffectMainInventory extends CoreInventory {
             setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.FIREWORK, 1, 0).displayName("§a§lKonfetti aktiviert").lore("§7§oKlicke zum deaktivieren").create(), e -> {
                 player.closeInventory();
                 EffectManager.setSmokeFalse();
-                CommunityPlugin.getInstance().getMessager().send(player, "§cBühnen Konfetti aus");
+                CommunityPlugin.getInstance().getMessenger().send(player, "§cBühnen Konfetti aus");
             });
         }
 
         if (!EffectManager.isWhite()) {
             setItem(InventorySlot.ROW_2_SLOT_4, new ItemBuilder(Material.SNOW_BALL, 1, 0).displayName("§c§lSchnee deaktiviert").lore("§7§oKlicke hier zum aktivieren").create(), e -> {
                 player.closeInventory();
-                CommunityPlugin.getInstance().getMessager().send(player, "§cBühnen Schnee an");
+                CommunityPlugin.getInstance().getMessenger().send(player, "§cBühnen Schnee an");
                 EffectManager.setWhiteTrue();
 
             });
@@ -64,14 +64,14 @@ public class EffectMainInventory extends CoreInventory {
             setItem(InventorySlot.ROW_2_SLOT_4, new ItemBuilder(Material.SNOW_BALL, 1, 0).displayName("§a§lSchnee aktiviert").lore("§7§oKlicke zum deaktivieren").create(), e -> {
                 player.closeInventory();
                 EffectManager.setWhiteFalse();
-                CommunityPlugin.getInstance().getMessager().send(player, "§cBühnen Schnee aus");
+                CommunityPlugin.getInstance().getMessenger().send(player, "§cBühnen Schnee aus");
             });
         }
 
         if (!EffectManager.isBlass()) {
             setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.GLASS, 1, 0).displayName("§c§lBlasen deaktiviert").lore("§7§oKlicke hier zum aktivieren").create(), e -> {
                 player.closeInventory();
-                CommunityPlugin.getInstance().getMessager().send(player, "§cBühnen Blasen an");
+                CommunityPlugin.getInstance().getMessenger().send(player, "§cBühnen Blasen an");
                 EffectManager.setBlassTrue();
 
             });
@@ -79,7 +79,7 @@ public class EffectMainInventory extends CoreInventory {
             setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.GLASS, 1, 0).displayName("§a§lBlasen aktiviert").lore("§7§oKlicke zum deaktivieren").create(), e -> {
                 player.closeInventory();
                 EffectManager.setBlassFalse();
-                CommunityPlugin.getInstance().getMessager().send(player, "§cBühnen Blasen aus");
+                CommunityPlugin.getInstance().getMessenger().send(player, "§cBühnen Blasen aus");
             });
         }
 

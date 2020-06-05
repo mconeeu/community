@@ -22,12 +22,12 @@ public class CommunitySettingsInventory extends CoreInventory {
                 p.closeInventory();
                 p.setAllowFlight(false);
                 p.setFlying(false);
-                CommunityPlugin.getInstance().getMessager().send(p, "§cDu kannst nun nicht mehr fliegen");
+                CommunityPlugin.getInstance().getMessenger().send(p, "§cDu kannst nun nicht mehr fliegen");
             });
         } else {
             setItem(InventorySlot.ROW_2_SLOT_2, new ItemBuilder(Material.FEATHER, 1, 0).displayName("§c§lFlugmodus deaktiviert").lore("§7§oKlicke hier zum aktivieren").create(), e -> {
                 p.closeInventory();
-                CommunityPlugin.getInstance().getMessager().send(p, "§aDu kannst nun fliegen");
+                CommunityPlugin.getInstance().getMessenger().send(p, "§aDu kannst nun fliegen");
                 p.setAllowFlight(true);
                 p.setFlying(true);
 
