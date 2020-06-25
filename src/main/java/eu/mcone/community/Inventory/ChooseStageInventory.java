@@ -24,7 +24,7 @@ public class ChooseStageInventory extends CoreInventory {
 
         });
 
-        setItem(InventorySlot.ROW_2_SLOT_6, new ItemBuilder(Material.DIAMOND_BLOCK, 1, 0).displayName("§c§lMain Stage").lore("§7§oKlicke zum deaktivieren").create(), e -> {
+        setItem(InventorySlot.ROW_2_SLOT_6, new ItemBuilder(Material.DIAMOND_BLOCK, 1, 0).displayName("§c§lMain Stage").lore("§7§oKlicke hier zum beatbeiten").create(), e -> {
             player.closeInventory();
             new EffectMainInventory(player);
         });
