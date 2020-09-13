@@ -13,7 +13,7 @@ import eu.mcone.community.Inventory.NavigatorInventory;
 import eu.mcone.community.utils.PlayerHider;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
-import eu.mcone.lobby.api.enums.LobbyCategory;
+import eu.mcone.lobby.api.items.LobbyCategory;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.Sound;

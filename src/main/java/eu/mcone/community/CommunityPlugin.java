@@ -9,7 +9,7 @@ import eu.mcone.coresystem.api.bukkit.world.BuildSystem;
 import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
 import eu.mcone.gameapi.api.GamePlugin;
 import eu.mcone.gameapi.api.Option;
-import eu.mcone.lobby.api.enums.LobbyCategory;
+import eu.mcone.lobby.api.items.LobbyCategory;
 import lombok.Getter;
 import org.bukkit.ChatColor;
 
