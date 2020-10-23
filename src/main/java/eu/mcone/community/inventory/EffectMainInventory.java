@@ -1,4 +1,4 @@
-package eu.mcone.community.Inventory;
+package eu.mcone.community.inventory;
 
 import eu.mcone.community.CommunityPlugin;
 import eu.mcone.community.utils.EffectManager;
@@ -8,12 +8,8 @@ import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
-import org.bukkit.Bukkit;
-import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-
-import java.util.ArrayList;
 
 public class EffectMainInventory extends CoreInventory {
 

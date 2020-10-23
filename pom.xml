@@ -17,6 +17,22 @@
                     <target>8</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.1.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <shadedArtifactAttached>false</shadedArtifactAttached>
+                </configuration>
+            </plugin>
         </plugins>
         <resources>
             <resource>
@@ -35,19 +51,10 @@
 
     <repositories>
         <repository>
-            <id>mcone-systems</id>
-            <name>MC ONE Repo</name>
-            <url>https://repo.onegaming.group/repository/mcone-systems/</url>
+            <id>onegaming-gitlab-systems</id>
+            <url>https://gitlab.onegaming.group/api/v4/groups/systems/-/packages/maven</url>
         </repository>
     </repositories>
-
-    <distributionManagement>
-        <repository>
-            <id>mcone-systems</id>
-            <name>MC ONE Repo</name>
-            <url>https://repo.onegaming.group/repository/mcone-systems/</url>
-        </repository>
-    </distributionManagement>
 
     <dependencies>
         <dependency>
@@ -65,19 +72,19 @@
         <dependency>
             <groupId>eu.mcone.coresystem</groupId>
             <artifactId>bukkit-api</artifactId>
-            <version>10.8.10-SNAPSHOT</version>
+            <version>10.9.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>eu.mcone.gameapi</groupId>
             <artifactId>api</artifactId>
-            <version>3.5.0-SNAPSHOT</version>
+            <version>4.1.2-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>eu.mcone.lobby</groupId>
             <artifactId>api</artifactId>
-            <version>5.0.5-SNAPSHOT</version>
+            <version>5.3.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

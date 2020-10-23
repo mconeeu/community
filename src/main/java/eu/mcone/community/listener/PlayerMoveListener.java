@@ -1,4 +1,4 @@
-package eu.mcone.community.Listener;
+package eu.mcone.community.listener;
 
 import eu.mcone.community.CommunityPlugin;
 import eu.mcone.community.commands.FreeEntranceCMD;

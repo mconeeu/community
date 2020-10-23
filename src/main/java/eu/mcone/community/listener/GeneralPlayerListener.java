@@ -3,7 +3,7 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.community.Listener;
+package eu.mcone.community.listener;
 
 import eu.mcone.community.CommunityPlugin;
 import org.bukkit.GameMode;

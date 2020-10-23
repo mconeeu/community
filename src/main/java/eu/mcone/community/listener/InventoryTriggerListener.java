@@ -3,13 +3,13 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.community.Listener;
+package eu.mcone.community.listener;
 
 import eu.mcone.community.CommunityPlugin;
-import eu.mcone.community.Inventory.CommunitySettingsInventory;
-import eu.mcone.community.Inventory.EffectMainInventory;
-import eu.mcone.community.Inventory.EffectPremiumInventory;
-import eu.mcone.community.Inventory.NavigatorInventory;
+import eu.mcone.community.inventory.CommunitySettingsInventory;
+import eu.mcone.community.inventory.EffectMainInventory;
+import eu.mcone.community.inventory.EffectPremiumInventory;
+import eu.mcone.community.inventory.NavigatorInventory;
 import eu.mcone.community.utils.PlayerHider;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;

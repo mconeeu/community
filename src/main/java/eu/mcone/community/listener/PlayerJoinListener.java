@@ -3,7 +3,7 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.community.Listener;
+package eu.mcone.community.listener;
 
 import eu.mcone.community.CommunityPlugin;
 import eu.mcone.community.utils.PlayerHider;
@@ -11,7 +11,6 @@ import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
-import eu.mcone.lobby.api.LobbyPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
