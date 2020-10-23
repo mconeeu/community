@@ -1,7 +1,7 @@
 package eu.mcone.community.commands;
 
 import eu.mcone.community.CommunityPlugin;
-import eu.mcone.community.Inventory.EffectMainInventory;
+import eu.mcone.community.inventory.EffectMainInventory;
 import eu.mcone.coresystem.api.bukkit.command.CorePlayerCommand;
 import org.bukkit.entity.Player;
 

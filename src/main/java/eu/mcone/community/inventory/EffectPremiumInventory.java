@@ -1,4 +1,4 @@
-package eu.mcone.community.Inventory;
+package eu.mcone.community.inventory;
 
 import eu.mcone.community.CommunityPlugin;
 import eu.mcone.community.utils.EffectManager;

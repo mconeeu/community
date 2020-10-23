@@ -3,7 +3,7 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.community.Listener;
+package eu.mcone.community.listener;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

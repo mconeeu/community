@@ -1,6 +1,6 @@
-package eu.mcone.community.Listener;
+package eu.mcone.community.listener;
 
-import eu.mcone.community.Inventory.TraderInventory;
+import eu.mcone.community.inventory.TraderInventory;
 import eu.mcone.coresystem.api.bukkit.event.npc.NpcInteractEvent;
 import eu.mcone.coresystem.api.bukkit.npc.entity.PlayerNpc;
 import net.minecraft.server.v1_8_R3.PacketPlayInUseEntity;

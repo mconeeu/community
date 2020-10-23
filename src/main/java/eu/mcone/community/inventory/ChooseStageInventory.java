@@ -1,4 +1,4 @@
-package eu.mcone.community.Inventory;
+package eu.mcone.community.inventory;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;

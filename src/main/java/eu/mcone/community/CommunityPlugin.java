@@ -1,6 +1,6 @@
 package eu.mcone.community;
 
-import eu.mcone.community.Listener.*;
+import eu.mcone.community.listener.*;
 import eu.mcone.community.commands.CommunityCMD;
 import eu.mcone.community.commands.EffectCMD;
 import eu.mcone.community.commands.FreeEntranceCMD;
