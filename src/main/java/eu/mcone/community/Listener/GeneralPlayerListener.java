@@ -40,22 +40,14 @@ public class GeneralPlayerListener implements Listener {
     public void onPickupItem(PlayerPickupItemEvent e) {
         Player p = e.getPlayer();
 
-        if (p.getGameMode() == GameMode.CREATIVE) {
-            e.setCancelled(false);
-        } else {
-            e.setCancelled(true);
-        }
+        e.setCancelled(p.getGameMode() != GameMode.CREATIVE);
     }
 
     @EventHandler
     public void onDropItem(PlayerDropItemEvent e) {
         Player p = e.getPlayer();
 
-        if (p.getGameMode() == GameMode.CREATIVE) {
-            e.setCancelled(false);
-        } else {
-            e.setCancelled(true);
-        }
+        e.setCancelled(p.getGameMode() != GameMode.CREATIVE);
     }
 
     @EventHandler
@@ -72,6 +64,7 @@ public class GeneralPlayerListener implements Listener {
     public void onAchievementAwarded(PlayerAchievementAwardedEvent e) {
         e.setCancelled(true);
     }
+
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onQuit(PlayerQuitEvent e) {

@@ -16,9 +16,8 @@ public class EffectCMD extends CorePlayerCommand {
         if (p.hasPermission("community.effectmenu")) {
             new EffectMainInventory(p);
         } else {
-            CommunityPlugin.getInstance().getMessenger().send(p, "§4Du hast für diesen Befehl keine Berechtigung!");
+            CommunityPlugin.getInstance().getMessenger().sendTransl(p, "system.command.noperm");
         }
-
         return false;
     }
 }

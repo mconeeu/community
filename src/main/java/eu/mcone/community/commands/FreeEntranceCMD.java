@@ -1,11 +1,9 @@
 package eu.mcone.community.commands;
 
 import eu.mcone.community.CommunityPlugin;
-import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.command.CorePlayerCommand;
 import eu.mcone.gameapi.api.backpack.defaults.DefaultItem;
 import eu.mcone.gameapi.api.player.GamePlayer;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class FreeEntranceCMD extends CorePlayerCommand {
@@ -24,17 +22,16 @@ public class FreeEntranceCMD extends CorePlayerCommand {
                 if (args[0].equalsIgnoreCase("on")) {
                     if (!freeEntrance) {
                         freeEntrance = true;
-                        CommunityPlugin.getInstance().getMessenger().send(player, "§aDer Eintritt ist nun für jeden gratis!");
-
+                        CommunityPlugin.getInstance().getMessenger().sendTransl(player, "community.freeentrance.activate.sender");
                         for (GamePlayer gamePlayer : CommunityPlugin.getInstance().getOnlineGamePlayers()) {
                             if (!gamePlayer.bukkit().hasPermission("community.bypass.entrance")) {
                                 if (!gamePlayer.hasDefaultItem(DefaultItem.FESTIVAL_ENTRANCE)) {
-                                    CommunityPlugin.getInstance().getMessenger().send(gamePlayer.bukkit(), "§aDer Festival Eintritt ist nun gratis!");
+                                    CommunityPlugin.getInstance().getMessenger().send(gamePlayer.bukkit(), "community.freeentrance.activate.players");
                                 }
                             }
                         }
                     } else {
-                        CommunityPlugin.getInstance().getMessenger().send(player, "§4Der Eintritt ist bereits für jeden gratis!");
+                        CommunityPlugin.getInstance().getMessenger().sendTransl(player, "community.freeentrance.alreadyactive");
                     }
 
                 } else if (args[0].equalsIgnoreCase("off")) {
@@ -42,27 +39,27 @@ public class FreeEntranceCMD extends CorePlayerCommand {
                         freeEntrance = false;
 
                         player.closeInventory();
-                        CommunityPlugin.getInstance().getMessenger().send(player, "§aDer Eintritt ist nun nicht mehr für jeden gratis!");
+                        CommunityPlugin.getInstance().getMessenger().sendTransl(player, "community.freeentrance.deactivate.sender");
 
                         for (GamePlayer gamePlayer : CommunityPlugin.getInstance().getOnlineGamePlayers()) {
                             if (!gamePlayer.bukkit().hasPermission("community.bypass.entrance")) {
                                 if (!gamePlayer.hasDefaultItem(DefaultItem.FESTIVAL_ENTRANCE)) {
-                                    CommunityPlugin.getInstance().getMessenger().send(gamePlayer.bukkit(), "§4Der Festival Eintritt ist nun nicht mehr gratis, und du wurdest rausgeschmissen!");
+                                    CommunityPlugin.getInstance().getMessenger().sendTransl(gamePlayer.bukkit(), "community.freeentrace.deactivate.players");
                                     CommunityPlugin.getInstance().getCommunityWorld().teleportSilently(gamePlayer.bukkit(), "entrance-out");
                                 }
                             }
                         }
                     } else {
-                        CommunityPlugin.getInstance().getMessenger().send(player, "§4Der Festival gratis Eintritt ist bereits deaktivert!");
+                        CommunityPlugin.getInstance().getMessenger().sendTransl(player, "community.freeentrance.alreadydeactivated");
                     }
 
 
                 }
             } else {
-                CommunityPlugin.getInstance().getMessenger().send(player, "§4Bitte benutze; §c/freeentrance [<on/off>]");
+                CommunityPlugin.getInstance().getMessenger().sendTransl(player, "community.freeentrance.command.syntax");
             }
         } else {
-            CommunityPlugin.getInstance().getMessenger().send(player, "§4Du hast keine Berechtingung für diesen Befehl!");
+            CommunityPlugin.getInstance().getMessenger().sendTransl(player, "system.command.noperm");
         }
 
         return false;

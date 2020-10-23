@@ -28,7 +28,7 @@ public class EntitiyDamageListener implements Listener {
     public void onEntityDamageByEntity(EntityDamageByEntityEvent e) {
         e.setCancelled(true);
 
-            }
-        }
+    }
+}
 
 

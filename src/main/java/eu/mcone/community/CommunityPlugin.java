@@ -26,7 +26,7 @@ public class CommunityPlugin extends GamePlugin {
     @Getter
     private CoreWorld communityWorld;
 
-    //Main
+    //Mainw
     public CommunityPlugin() {
         super("community", ChatColor.LIGHT_PURPLE, "community.prefix", Option.BACKPACK_MANAGER_REGISTER_OUTFIT_CATEGORY, Option.BACKPACK_MANAGER_REGISTER_HAT_CATEGORY, Option.BACKPACK_MANAGER_REGISTER_TRAIL_CATEGORY, Option.BACKPACK_MANAGER_REGISTER_EXCLUSIVE_CATEGORY, Option.BACKPACK_MANAGER_USE_RANK_BOOTS);
     }

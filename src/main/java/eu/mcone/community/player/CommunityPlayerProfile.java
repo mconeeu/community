@@ -18,5 +18,4 @@ public class CommunityPlayerProfile extends GameProfile {
     public void doSetData(Player player) {
 
     }
-
 }

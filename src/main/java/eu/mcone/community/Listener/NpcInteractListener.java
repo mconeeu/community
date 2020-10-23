@@ -16,7 +16,6 @@ public class NpcInteractListener implements Listener {
         if (e.getNpc().getData().getType().equals(EntityType.PLAYER) && e.getAction().equals(PacketPlayInUseEntity.EnumEntityUseAction.INTERACT)) {
             Player p = e.getPlayer();
             PlayerNpc npc = (PlayerNpc) e.getNpc();
-
             if ("trader".equals(npc.getData().getName())) {
                 new TraderInventory(p);
             }

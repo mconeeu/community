@@ -13,6 +13,7 @@ import eu.mcone.community.Inventory.NavigatorInventory;
 import eu.mcone.community.utils.PlayerHider;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
+import eu.mcone.coresystem.api.core.translation.TranslationManager;
 import eu.mcone.lobby.api.items.LobbyCategory;
 import org.bukkit.Effect;
 import org.bukkit.Material;
@@ -34,6 +35,8 @@ public class InventoryTriggerListener implements Listener {
     @EventHandler
     public void on(PlayerInteractEvent e) {
         Player p = e.getPlayer();
+        CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
+        TranslationManager tm = CoreSystem.getInstance().getTranslationManager();
 
 
         if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
@@ -45,7 +48,7 @@ public class InventoryTriggerListener implements Listener {
                         if (p.hasPermission("community.effectmenu")) {
                             new EffectMainInventory(p);
                         } else {
-                            CommunityPlugin.getInstance().getMessenger().send(p, "§4Du hast dafür keine Berechtigung!");
+                            CommunityPlugin.getInstance().getMessenger().sendTransl(p, "community.inventorytriggerlistener.noperms");
                         }
                     }
                 }
@@ -55,7 +58,7 @@ public class InventoryTriggerListener implements Listener {
                         if (p.hasPermission("community.premium.effectmenu")) {
                             new EffectPremiumInventory(p);
                         } else {
-                            CommunityPlugin.getInstance().getMessenger().send(p, "§4Du hast dafür keine Berechtigung!");
+                            CommunityPlugin.getInstance().getMessenger().sendTransl(p, "community.inventorytriggerlistener.noperms");
                         }
                     }
                 }
@@ -67,10 +70,10 @@ public class InventoryTriggerListener implements Listener {
             }
 
 
-            if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lRucksack §8» §7§oZeige deine gesammelten Items an")) {
+            if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase(tm.get("system.backpack.name", cp))) {
                 e.setCancelled(true);
                 CommunityPlugin.getInstance().getBackpackManager().openBackpackInventory(LobbyCategory.STORY_ITEMS.name(), p);
-            } else if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde")) {
+            } else if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase(tm.get("system.profil.name", cp))) {
                 e.setCancelled(true);
                 p.performCommand("profile");
             } else if (p.getItemInHand().getItemMeta().getDisplayName().equals("§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus")) {
@@ -89,7 +92,6 @@ public class InventoryTriggerListener implements Listener {
                 new CommunitySettingsInventory(p);
             } else if (e.getItem().getType() == Material.EYE_OF_ENDER) {
                 if (e.getAction() == Action.RIGHT_CLICK_AIR | e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-                    CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
                     if (!cp.isVanished()) {
                         e.setCancelled(true);
                         if (run.containsKey(p)) {

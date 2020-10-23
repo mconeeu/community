@@ -5,7 +5,6 @@ import net.minecraft.server.v1_8_R3.EnumParticle;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitTask;
 
 public class EffectManager {
 
@@ -106,17 +105,6 @@ public class EffectManager {
                     particle6.sendToAll(all);
                     particle7.sendToAll(all);
 
-
-
-                /*    all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("white-1"), Effect.CRIT, 20, 1, 1, 1, 2, 2, 5, 20);
-                    all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("white-2"), Effect.CRIT, 20, 1, 1, 1, 2, 2, 5, 20);
-                    all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("white-3"), Effect.CRIT, 20, 1, 1, 1, 2, 2, 5, 20);
-                    all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("white-4"), Effect.CRIT, 20, 1, 1, 1, 2, 2, 5, 20);
-                    all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("white-5"), Effect.CRIT, 20, 1, 1, 1, 2, 2, 5, 20);
-                    all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("white-6"), Effect.CRIT, 20, 1, 1, 1, 2, 2, 5, 20);
-                    all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("white-7"), Effect.CRIT, 20, 1, 1, 1, 2, 2, 5, 20);
-
-              */
                 }
             }, 1, 2);
         }
@@ -186,21 +174,10 @@ public class EffectManager {
                     Particle particle3 = new Particle(EnumParticle.LAVA, CommunityPlugin.getInstance().getCommunityWorld().getLocation("fire4"), 0, 2, 0, 10, 5);
                     Particle particle4 = new Particle(EnumParticle.LAVA, CommunityPlugin.getInstance().getCommunityWorld().getLocation("fire3"), 0, 2, 0, 10, 5);
 
-
                     particle1.sendToAll(all);
                     particle2.sendToAll(all);
                     particle3.sendToAll(all);
                     particle4.sendToAll(all);
-
-                /*    all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("fire1"), Effect.LAVA_POP, 100, 1, 1, 1, 1, 3, 15, 20);
-                    all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("fire2"), Effect.LAVA_POP, 100, 1, 1, 1, 1, 3, 15, 20);
-                    all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("fire3"), Effect.LAVA_POP, 100, 1, 1, 1, 1, 3, 15, 20);
-                    all.spigot().playEffect(CommunityPlugin.getInstance().getCommunityWorld().getLocation("fire4"), Effect.LAVA_POP, 100, 1, 1, 1, 1, 3, 15, 20);
-
-
-
-                 */
-
 
                 }
             }, 1, 2);

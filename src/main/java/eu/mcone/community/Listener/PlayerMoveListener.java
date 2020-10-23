@@ -17,8 +17,6 @@ public class PlayerMoveListener implements Listener {
     @EventHandler
     public void on(PlayerMoveEvent e) {
         Player p = e.getPlayer();
-
-
         //entrance
         Location buehne1 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("buehen3");
         Location buehne2 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("buehen4");
@@ -117,7 +115,7 @@ public class PlayerMoveListener implements Listener {
             if (!gamePlayer.hasDefaultItem(DefaultItem.FESTIVAL_ENTRANCE)) {
                 Vector v1 = p.getLocation().getDirection().multiply(0.8).setZ(0.6);
                 p.setVelocity(v1);
-                CommunityPlugin.getInstance().getMessenger().send(p, "§cDu darfst in diesen Bereich nur mit Eintrittskarte, kaufe sie dir beim Händler!");
+                CommunityPlugin.getInstance().getMessenger().sendTransl(p, "community.playermovelistener.entry.noentryticket");
             }
 
         }
@@ -126,19 +124,7 @@ public class PlayerMoveListener implements Listener {
         for (Player players : InventoryTriggerListener.run.keySet()) {
             if (!p.hasPermission("community.bypass")) {
                 if (p.getLocation().distance(players.getLocation()) <= 3) {
-
-                    double Ax = p.getLocation().getX();
-                    double Ay = p.getLocation().getY();
-                    double Az = p.getLocation().getZ();
-
-                    double Bx = players.getLocation().getX();
-                    double By = players.getLocation().getY();
-                    double Bz = players.getLocation().getZ();
-
-                    double x = Ax - Bx;
-                    double y = Ay - By;
-                    double z = Az - Bz;
-                    Vector v = new Vector(x, y, z).normalize();
+                    Vector v = vectorCreator(p, players);
                     p.setVelocity(v);
 
                 }
@@ -150,19 +136,7 @@ public class PlayerMoveListener implements Listener {
                     Player target = (Player) entity;
                     if (p != target) {
                         if (!target.hasPermission("community.bypass")) {
-
-                            double Ax = p.getLocation().getX();
-                            double Ay = p.getLocation().getY();
-                            double Az = p.getLocation().getZ();
-
-                            double Bx = target.getLocation().getX();
-                            double By = target.getLocation().getY();
-                            double Bz = target.getLocation().getZ();
-
-                            double x = Bx - Ax;
-                            double y = By - Ay;
-                            double z = Bz - Az;
-                            Vector v = new Vector(x, y, z).normalize();
+                            Vector v = vectorCreator(p, target);
                             target.setVelocity(v);
 
                         }
@@ -170,6 +144,23 @@ public class PlayerMoveListener implements Listener {
                 }
             }
         }
-
     }
+
+    private Vector vectorCreator(Player player, Player target) {
+        double Ax = player.getLocation().getX();
+        double Ay = player.getLocation().getY();
+        double Az = player.getLocation().getZ();
+
+        double Bx = target.getLocation().getX();
+        double By = target.getLocation().getY();
+        double Bz = target.getLocation().getZ();
+
+        double x = Bx - Ax;
+        double y = By - Ay;
+        double z = Bz - Az;
+        Vector v = new Vector(x, y, z).normalize();
+
+        return v;
+    }
+
 }
