@@ -1,33 +1,28 @@
-/*
- * Copyright (c) 2017 - 2019 Rufus Maiwald, Marvin Hülsmann, Dominik Lippl and the MC ONE Minecraftnetwork. All rights reserved
- * You are not allowed to decompile the code
- */
-
 package eu.mcone.community.listener;
 
 import eu.mcone.community.CommunityPlugin;
 import eu.mcone.community.utils.PlayerHider;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.event.player.PermissionChangeEvent;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
+import jdk.Exported;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
 
-public class PlayerJoinListener implements Listener {
+public class PermissionChangeListener implements Listener {
 
 
     @EventHandler
-    public void on(PlayerJoinEvent e) {
-        Player p = e.getPlayer();
-        CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
+    public void on(PermissionChangeEvent e) {
+        CorePlayer cp = e.getPlayer();
+        Player p = cp.bukkit();
 
-        e.setJoinMessage(null);
         p.playEffect(p.getLocation(), org.bukkit.Effect.HAPPY_VILLAGER, 5);
 
         p.setWalkSpeed(0.2F);
@@ -60,10 +55,8 @@ public class PlayerJoinListener implements Listener {
             p.getInventory().setItem(6, new ItemBuilder(Material.REDSTONE_COMPARATOR, 1, 0).displayName("§3§lCommunity Einstellungen §8» §7§oBearbeite Team einstellungen").create());
         }
 
-        //only admin or HIGH RANK HIGH!!
         if (p.hasPermission("community.protective.shield.admin")) {
             p.getInventory().setItem(5, new ItemBuilder(Material.EYE_OF_ENDER, 1, 0).displayName("§3§lSchutzschild §8» §7§oSchleuder Spieler weg").create());
         }
-
     }
 }

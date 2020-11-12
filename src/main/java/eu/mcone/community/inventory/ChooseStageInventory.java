@@ -16,13 +16,13 @@ public class ChooseStageInventory extends CoreInventory {
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(player);
 
 
-        setItem(InventorySlot.ROW_2_SLOT_4, new ItemBuilder(Material.GOLD_BLOCK, 1, 0).displayName("§c§lPremium Stage").lore("§7§oKlicke hier zum beatbeiten").create(), e -> {
+        setItem(InventorySlot.ROW_2_SLOT_4, new ItemBuilder(Material.GOLD_BLOCK, 1, 0).displayName("§c§lPremium Stage").lore("§7§oKlicke hier zum bearbeiten").create(), e -> {
             player.closeInventory();
             new EffectPremiumInventory(player);
 
         });
 
-        setItem(InventorySlot.ROW_2_SLOT_6, new ItemBuilder(Material.DIAMOND_BLOCK, 1, 0).displayName("§c§lMain Stage").lore("§7§oKlicke hier zum beatbeiten").create(), e -> {
+        setItem(InventorySlot.ROW_2_SLOT_6, new ItemBuilder(Material.DIAMOND_BLOCK, 1, 0).displayName("§c§lMain Stage").lore("§7§oKlicke hier zum bearbeiten").create(), e -> {
             player.closeInventory();
             new EffectMainInventory(player);
         });

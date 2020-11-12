@@ -213,8 +213,8 @@ public class EffectManager {
     }
 
     public static void setFireFalse() {
-        fire = false;
-        Bukkit.getScheduler().cancelTask(fireShedular);
+            fire = false;
+            Bukkit.getScheduler().cancelTask(fireShedular);
     }
 
     public static boolean isFire() {

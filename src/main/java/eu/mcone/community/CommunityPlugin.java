@@ -3,7 +3,6 @@ package eu.mcone.community;
 import eu.mcone.community.listener.*;
 import eu.mcone.community.commands.CommunityCMD;
 import eu.mcone.community.commands.EffectCMD;
-import eu.mcone.community.commands.FreeEntranceCMD;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.world.BuildSystem;
 import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
@@ -28,7 +27,9 @@ public class CommunityPlugin extends GamePlugin {
 
     //Main
     public CommunityPlugin() {
-        super("community", ChatColor.LIGHT_PURPLE, "community.prefix", Option.BACKPACK_MANAGER_REGISTER_OUTFIT_CATEGORY, Option.BACKPACK_MANAGER_REGISTER_HAT_CATEGORY, Option.BACKPACK_MANAGER_REGISTER_TRAIL_CATEGORY, Option.BACKPACK_MANAGER_REGISTER_EXCLUSIVE_CATEGORY, Option.BACKPACK_MANAGER_USE_RANK_BOOTS);
+        super("community", ChatColor.LIGHT_PURPLE, "community.prefix", Option.BACKPACK_MANAGER_REGISTER_OUTFIT_CATEGORY,
+                Option.BACKPACK_MANAGER_REGISTER_HAT_CATEGORY, Option.BACKPACK_MANAGER_REGISTER_TRAIL_CATEGORY,
+                Option.BACKPACK_MANAGER_REGISTER_EXCLUSIVE_CATEGORY, Option.BACKPACK_MANAGER_AUTO_SET_RANK_BOOTS);
     }
 
 
@@ -36,7 +37,7 @@ public class CommunityPlugin extends GamePlugin {
     public void onGameEnable() {
         instance = this;
         system = this;
-        communityWorld = CoreSystem.getInstance().getWorldManager().getWorld("Community");
+        communityWorld = CoreSystem.getInstance().getWorldManager().getWorld("Community-new");
         CoreSystem.getInstance().enableSpawnCommand(this, communityWorld, 0);
 
         buildSystem = CoreSystem.getInstance().initialiseBuildSystem(BuildSystem.BuildEvent.BLOCK_BREAK, BuildSystem.BuildEvent.BLOCK_PLACE, BuildSystem.BuildEvent.INTERACT);
@@ -52,14 +53,13 @@ public class CommunityPlugin extends GamePlugin {
                 new PlayerQuitListener(),
                 new PlayerMoveListener(),
                 new VanishListener(),
-                new NpcInteractListener()
+                new PermissionChangeListener()
         );
 
 
         registerCommands(
                 new CommunityCMD(),
-                new EffectCMD(),
-                new FreeEntranceCMD()
+                new EffectCMD()
         );
         getBackpackManager().loadAdditionalCategories(LobbyCategory.STORY_ITEMS.name());
 

@@ -1,7 +1,6 @@
 package eu.mcone.community.listener;
 
 import eu.mcone.community.CommunityPlugin;
-import eu.mcone.community.commands.FreeEntranceCMD;
 import eu.mcone.gameapi.api.backpack.defaults.DefaultItem;
 import eu.mcone.gameapi.api.player.GamePlayer;
 import org.bukkit.Location;
@@ -24,18 +23,14 @@ public class PlayerMoveListener implements Listener {
         Location buehne2 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("buehen4");
         Location buehne3 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("buehen1");
         Location buehne4 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("buehen2");
+        Location buehne5 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("buehen5");
+        Location buehne6 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("buehen6");
 
 
         //back stairs out/entrance
-        Location backStairs1 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("buehne-s2");
-        Location backStairs2 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("buehne-s1");
+        //       Location backStairs1 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("buehne-s2");
+        //     Location backStairs2 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("buehne-s1");
 
-
-        //entrance
-        Location entrance1 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("entrance1");
-        Location entrance2 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("entrance2");
-        Location entrance3 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("entrance3");
-        Location entrance4 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("entrance4");
 
         //backstage entrance big
         Location back1 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("buehne-p1");
@@ -64,62 +59,40 @@ public class PlayerMoveListener implements Listener {
         if (!p.hasPermission("community.buehne")) {
             //entrance left
             if (p.getLocation().distance(buehne1) <= 2 ||
-                    p.getLocation().distance(buehne2) <= 2) {
+                    p.getLocation().distance(buehne2) <= 2 ||
+                    p.getLocation().distance(buehne3) <= 2) {
 
-                Vector v1 = p.getLocation().getDirection().multiply(0.8).setX(0.7);
+                Vector v1 = p.getLocation().getDirection().multiply(0.8).setZ(-0.7);
                 p.setVelocity(v1);
             } else if (
                 //right
-                    p.getLocation().distance(buehne3) <= 2 ||
-                            p.getLocation().distance(buehne4) <= 2) {
+                    p.getLocation().distance(buehne4) <= 2 ||
+                            p.getLocation().distance(buehne5) <= 2 ||
+                            p.getLocation().distance(buehne6) <= 2) {
 
-                Vector v1 = p.getLocation().getDirection().multiply(0.8).setX(-0.7);
+                Vector v1 = p.getLocation().getDirection().multiply(0.8).setZ(-0.7);
                 p.setVelocity(v1);
             }
-            //entrance backstairs
-            if (p.getLocation().distance(backStairs1) <= 2 ||
+        }
+        //entrance backstairs
+         /*   if (p.getLocation().distance(backStairs1) <= 2 ||
                     p.getLocation().distance(backStairs2) <= 2) {
 
                 Vector v1 = p.getLocation().getDirection().multiply(0.8).setZ(-0.7);
                 p.setVelocity(v1);
             }
             //entrance backstage big
-        }
-        if (!p.hasPermission("community.backstage") || !p.hasPermission("community.buehne")) {
+        }*/
+        if (!p.hasPermission("community.teamhouse") || !p.hasPermission("community.buehne")) {
             if (
                     p.getLocation().distance(back1) <= 2 ||
                             p.getLocation().distance(back2) <= 2 ||
                             p.getLocation().distance(back3) <= 2) {
 
-                Vector v1 = p.getLocation().getDirection().multiply(0.8).setX(-0.7);
+                Vector v1 = p.getLocation().getDirection().multiply(0.8).setZ(0.7);
                 p.setVelocity(v1);
 
             }
-
-        }
-
-
-        //entrance
-        if (
-                p.getLocation().distance(entrance1) <= 1 ||
-                        p.getLocation().distance(entrance2) <= 1 ||
-                        p.getLocation().distance(entrance3) <= 1 ||
-                        p.getLocation().distance(entrance4) <= 1) {
-
-            GamePlayer gamePlayer = CommunityPlugin.getInstance().getGamePlayer(p);
-            if (p.hasPermission("community.bypass.entrance")) {
-                return;
-            }
-
-            if (FreeEntranceCMD.freeEntrance) {
-                return;
-            }
-            if (!gamePlayer.hasDefaultItem(DefaultItem.FESTIVAL_ENTRANCE)) {
-                Vector v1 = p.getLocation().getDirection().multiply(0.8).setZ(0.6);
-                p.setVelocity(v1);
-                CommunityPlugin.getInstance().getMessenger().send(p, "§cDu darfst in diesen Bereich nur mit Eintrittskarte, kaufe sie dir beim Händler!");
-            }
-
         }
 
 
@@ -170,6 +143,5 @@ public class PlayerMoveListener implements Listener {
                 }
             }
         }
-
     }
 }

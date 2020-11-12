@@ -21,7 +21,7 @@ import java.util.HashMap;
 public class PlayerHider {
 
     public static ArrayList<Player> players = new ArrayList<>();
-    private static HashMap<String, Long> time = new HashMap<>();
+    private static final HashMap<String, Long> time = new HashMap<>();
 
     public static void hidePlayers(Player p) {
         if (time.containsKey(p.getName())) {
