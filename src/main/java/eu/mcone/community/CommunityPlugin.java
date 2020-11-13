@@ -3,6 +3,9 @@ package eu.mcone.community;
 import eu.mcone.community.listener.*;
 import eu.mcone.community.commands.CommunityCMD;
 import eu.mcone.community.commands.EffectCMD;
+import eu.mcone.community.utils.effects.ShieldManager;
+import eu.mcone.community.utils.effects.StageEffectManager;
+import eu.mcone.community.utils.vanish.VanishManager;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.world.BuildSystem;
 import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
@@ -24,6 +27,12 @@ public class CommunityPlugin extends GamePlugin {
     private BuildSystem buildSystem;
     @Getter
     private CoreWorld communityWorld;
+    @Getter
+    private StageEffectManager stageEffectManager;
+    @Getter
+    private VanishManager vanishManager;
+    @Getter
+    private ShieldManager shieldManager;
 
     //Main
     public CommunityPlugin() {
@@ -37,10 +46,19 @@ public class CommunityPlugin extends GamePlugin {
     public void onGameEnable() {
         instance = this;
         system = this;
+
+        sendConsoleMessage("§aLoading StageEffectManager...");
+        stageEffectManager = new StageEffectManager();
+        sendConsoleMessage("§aLoading VanishManager...");
+        vanishManager = new VanishManager(this);
+        sendConsoleMessage("§aLoading ShieldManager...");
+        shieldManager = new ShieldManager();
+
+
         communityWorld = CoreSystem.getInstance().getWorldManager().getWorld("Community-new");
         CoreSystem.getInstance().enableSpawnCommand(this, communityWorld, 0);
 
-        buildSystem = CoreSystem.getInstance().initialiseBuildSystem(BuildSystem.BuildEvent.BLOCK_BREAK, BuildSystem.BuildEvent.BLOCK_PLACE, BuildSystem.BuildEvent.INTERACT);
+        buildSystem = CoreSystem.getInstance().initialiseBuildSystem(BuildSystem.BuildEvent.BLOCK_BREAK, BuildSystem.BuildEvent.BLOCK_PLACE);
         buildSystem.addFilter(BuildSystem.BuildEvent.INTERACT, 69);
 
         sendConsoleMessage("§aLoading Commands, Events, CoreInventories...");
@@ -48,14 +66,11 @@ public class CommunityPlugin extends GamePlugin {
                 new PlayerJoinListener(),
                 new InventoryTriggerListener(),
                 new GeneralPlayerListener(),
-                new WeatherChangeListener(),
                 new EntitiyDamageListener(),
                 new PlayerQuitListener(),
                 new PlayerMoveListener(),
-                new VanishListener(),
                 new PermissionChangeListener()
         );
-
 
         registerCommands(
                 new CommunityCMD(),

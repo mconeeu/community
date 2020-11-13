@@ -1,5 +1,6 @@
 package eu.mcone.community.inventory;
 
+import eu.mcone.community.CommunityPlugin;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
@@ -25,6 +26,13 @@ public class ChooseStageInventory extends CoreInventory {
         setItem(InventorySlot.ROW_2_SLOT_6, new ItemBuilder(Material.DIAMOND_BLOCK, 1, 0).displayName("§c§lMain Stage").lore("§7§oKlicke hier zum bearbeiten").create(), e -> {
             player.closeInventory();
             new EffectMainInventory(player);
+        });
+
+
+        setItem(InventorySlot.ROW_3_SLOT_9, new ItemBuilder(Material.BARRIER, 1).displayName("§4§lAlles deaktivieren").create(), e -> {
+            player.closeInventory();
+            CommunityPlugin.getInstance().getStageEffectManager().clearAllEffects();
+            CommunityPlugin.getInstance().getMessenger().send(player, "§2Du hast alle §aEfekte§2 ausgeschaltet!");
         });
 
 

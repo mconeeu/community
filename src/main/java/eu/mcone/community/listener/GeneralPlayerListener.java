@@ -6,6 +6,8 @@
 package eu.mcone.community.listener;
 
 import eu.mcone.community.CommunityPlugin;
+import eu.mcone.coresystem.api.bukkit.event.player.PlayerVanishEvent;
+import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,6 +20,7 @@ import org.bukkit.event.player.PlayerAchievementAwardedEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.weather.WeatherChangeEvent;
 
 public class GeneralPlayerListener implements Listener {
 
@@ -34,6 +37,25 @@ public class GeneralPlayerListener implements Listener {
         if (e.getEntity() instanceof Player) {
             e.setCancelled(true);
         }
+    }
+
+    @EventHandler
+    public void onVanish(PlayerVanishEvent e) {
+        CorePlayer player = e.getPlayer();
+
+        if (e.isVanished()) {
+            if (CommunityPlugin.getInstance().getShieldManager().getRun().containsKey(player.bukkit())) {
+                CommunityPlugin.getInstance().getShieldManager().getRun().get(player.bukkit()).cancel();
+                CommunityPlugin.getInstance().getShieldManager().getRun().remove(player.bukkit());
+                CommunityPlugin.getInstance().getMessenger().send(player.bukkit(), "§4Das Schutzschild wurde deaktivert, weil du den Vanish Modus betreten hast!");
+            }
+        }
+
+    }
+
+    @EventHandler
+    public void on(WeatherChangeEvent e) {
+        e.setCancelled(true);
     }
 
     @EventHandler

@@ -19,7 +19,7 @@ public class NavigatorInventory extends CoreInventory {
         super("§f§lNavigator", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
 
 
-        setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.FIREWORK_CHARGE, 1, 0).displayName("§b§lBühne").lore("§7§oKlicke zum Telepotieren").create(), e -> {
+        setItem(InventorySlot.ROW_2_SLOT_7, new ItemBuilder(Material.FIREWORK, 1, 0).displayName("§b§lBühne").lore("§7§oKlicke zum Telepotieren").create(), e -> {
             CommunityPlugin.getInstance().getCommunityWorld().teleportSilently(p, "buehne");
             p.closeInventory();
             CommunityPlugin.getInstance().getMessenger().send(p, "§aDu bist nun bei der Bühne!");
@@ -33,11 +33,26 @@ public class NavigatorInventory extends CoreInventory {
         });
 
 
-        setItem(InventorySlot.ROW_2_SLOT_7, new ItemBuilder(Material.NETHER_STAR, 1, 0).displayName("§b§lSpawn").lore("§7§oKlicke zum Telepotieren").create(), e -> {
+        setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.NETHER_STAR, 1, 0).displayName("§b§lSpawn").lore("§7§oKlicke zum Telepotieren").create(), e -> {
             CommunityPlugin.getInstance().getCommunityWorld().teleportSilently(p, "spawn");
             p.closeInventory();
             CommunityPlugin.getInstance().getMessenger().send(p, "§aDu bist nun beim Spawn!");
         });
+
+
+        if (p.hasPermission("community.team")) {
+            setItem(InventorySlot.ROW_3_SLOT_9, new ItemBuilder(Material.WOOD, 1, 0).displayName("§b§lBar").lore("§7§oKlicke zum Telepotieren").create(), e -> {
+                CommunityPlugin.getInstance().getCommunityWorld().teleportSilently(p, "teambar");
+                p.closeInventory();
+                CommunityPlugin.getInstance().getMessenger().send(p, "§aDu bist nun bei der Bar!");
+            });
+
+            setItem(InventorySlot.ROW_3_SLOT_8, new ItemBuilder(Material.CLAY, 1, 0).displayName("§b§lBühnen Dach").lore("§7§oKlicke zum Telepotieren").create(), e -> {
+                CommunityPlugin.getInstance().getCommunityWorld().teleportSilently(p, "buehneUp");
+                p.closeInventory();
+                CommunityPlugin.getInstance().getMessenger().send(p, "§aDu bist nun auf der Bühne!");
+            });
+        }
 
         openInventory();
     }

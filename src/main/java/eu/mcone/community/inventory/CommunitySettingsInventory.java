@@ -12,7 +12,6 @@ import org.bukkit.entity.Player;
 
 public class CommunitySettingsInventory extends CoreInventory {
 
-
     public CommunitySettingsInventory(Player p) {
         super("§f§lCommunity Einstellung", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);

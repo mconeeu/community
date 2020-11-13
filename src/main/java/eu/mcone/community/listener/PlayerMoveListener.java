@@ -18,6 +18,8 @@ public class PlayerMoveListener implements Listener {
         Player p = e.getPlayer();
 
 
+        //TODO must be reworked
+
         //entrance
         Location buehne1 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("buehen3");
         Location buehne2 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("buehen4");
@@ -27,12 +29,16 @@ public class PlayerMoveListener implements Listener {
         Location buehne6 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("buehen6");
 
 
-        //back stairs out/entrance
-        //       Location backStairs1 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("buehne-s2");
-        //     Location backStairs2 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("buehne-s1");
+        Location backStairs1 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("backstage1");
+        Location backStairs2 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("backstage2");
+        Location backStairs3 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("backstage3");
+        Location backStairs4 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("backstage4");
+        Location backStairs5 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("backstage5");
+        Location backStairs6 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("backstage6");
+        Location backStairs7 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("backstage7");
+        Location backStairs8 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("backstage8");
 
-
-        //backstage entrance big
+        //teamhouse
         Location back1 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("buehne-p1");
         Location back2 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("buehne-p2");
         Location back3 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("buehne-p3");
@@ -75,15 +81,31 @@ public class PlayerMoveListener implements Listener {
             }
         }
         //entrance backstairs
-         /*   if (p.getLocation().distance(backStairs1) <= 2 ||
-                    p.getLocation().distance(backStairs2) <= 2) {
+        if (!p.hasPermission("community.entrance.buehne")) {
+            if (p.getLocation().distance(backStairs1) <= 2 ||
+                    p.getLocation().distance(backStairs2) <= 2 ||
+                    p.getLocation().distance(backStairs3) <= 2 ||
+                    p.getLocation().distance(backStairs4) <= 2
+            ) {
 
-                Vector v1 = p.getLocation().getDirection().multiply(0.8).setZ(-0.7);
+                Vector v1 = p.getLocation().getDirection().multiply(0.8).setX(0.7);
+                p.setVelocity(v1);
+            } else if (p.getLocation().distance(backStairs5) <= 2 ||
+                    p.getLocation().distance(backStairs6) <= 2 ||
+                    p.getLocation().distance(backStairs7) <= 2 ||
+                    p.getLocation().distance(backStairs8) <= 2
+            ) {
+
+                Vector v1 = p.getLocation().getDirection().multiply(0.8).setX(-0.7);
                 p.setVelocity(v1);
             }
-            //entrance backstage big
-        }*/
-        if (!p.hasPermission("community.teamhouse") || !p.hasPermission("community.buehne")) {
+
+
+        }
+        //entrance backstage big
+
+
+        if (!p.hasPermission("community.teamhouse")) {
             if (
                     p.getLocation().distance(back1) <= 2 ||
                             p.getLocation().distance(back2) <= 2 ||
@@ -96,52 +118,11 @@ public class PlayerMoveListener implements Listener {
         }
 
 
-        for (Player players : InventoryTriggerListener.run.keySet()) {
-            if (!p.hasPermission("community.bypass")) {
-                if (p.getLocation().distance(players.getLocation()) <= 3) {
+        CommunityPlugin.getInstance().
 
-                    double Ax = p.getLocation().getX();
-                    double Ay = p.getLocation().getY();
-                    double Az = p.getLocation().getZ();
+                getShieldManager().
 
-                    double Bx = players.getLocation().getX();
-                    double By = players.getLocation().getY();
-                    double Bz = players.getLocation().getZ();
+                push(p);
 
-                    double x = Ax - Bx;
-                    double y = Ay - By;
-                    double z = Az - Bz;
-                    Vector v = new Vector(x, y, z).normalize();
-                    p.setVelocity(v);
-
-                }
-            }
-        }
-        if (InventoryTriggerListener.run.containsKey(p)) {
-            for (Entity entity : p.getNearbyEntities(3, 3, 3)) {
-                if (entity instanceof Player) {
-                    Player target = (Player) entity;
-                    if (p != target) {
-                        if (!target.hasPermission("community.bypass")) {
-
-                            double Ax = p.getLocation().getX();
-                            double Ay = p.getLocation().getY();
-                            double Az = p.getLocation().getZ();
-
-                            double Bx = target.getLocation().getX();
-                            double By = target.getLocation().getY();
-                            double Bz = target.getLocation().getZ();
-
-                            double x = Bx - Ax;
-                            double y = By - Ay;
-                            double z = Bz - Az;
-                            Vector v = new Vector(x, y, z).normalize();
-                            target.setVelocity(v);
-
-                        }
-                    }
-                }
-            }
-        }
     }
 }

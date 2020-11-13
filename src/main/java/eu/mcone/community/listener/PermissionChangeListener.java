@@ -1,14 +1,11 @@
 package eu.mcone.community.listener;
 
 import eu.mcone.community.CommunityPlugin;
-import eu.mcone.community.utils.PlayerHider;
-import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.community.utils.vanish.VanishPlayerVisibility;
 import eu.mcone.coresystem.api.bukkit.event.player.PermissionChangeEvent;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
-import jdk.Exported;
-import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -27,12 +24,6 @@ public class PermissionChangeListener implements Listener {
 
         p.setWalkSpeed(0.2F);
 
-        Bukkit.getScheduler().runTaskLater(CommunityPlugin.getSystem(), () -> {
-            PlayerHider.updateHider(p);
-        }, 1);
-
-        CommunityPlugin.getInstance().getCommunityWorld().teleportSilently(p, "spawn");
-
         p.getInventory().clear();
         p.getInventory().setArmorContents(null);
         p.setGameMode(GameMode.ADVENTURE);
@@ -49,7 +40,7 @@ public class PermissionChangeListener implements Listener {
         p.getInventory().setItem(0, new ItemBuilder(Material.COMPASS, 1, 0).displayName("§3§lNavigator §8» §7§oTelepotiere dich durch die Welt").create());
         //p.getInventory().setItem(1, new ItemBuilder(Material.STORAGE_MINECART, 1, 0).displayName("§3§lRucksack §8» §7§oZeige deine gesammelten Items an").create());
         p.getInventory().setItem(8, new Skull(p.getName(), 1).toItemBuilder().displayName("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde").create());
-        p.getInventory().setItem(7, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus").create());
+        p.getInventory().setItem(7, VanishPlayerVisibility.EVERYBODY.getItem());
 
         if (p.hasPermission("community.settings")) {
             p.getInventory().setItem(6, new ItemBuilder(Material.REDSTONE_COMPARATOR, 1, 0).displayName("§3§lCommunity Einstellungen §8» §7§oBearbeite Team einstellungen").create());
