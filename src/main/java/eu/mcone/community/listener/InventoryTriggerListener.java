@@ -66,10 +66,10 @@ public class InventoryTriggerListener implements Listener {
                 //    CommunityPlugin.getInstance().getBackpackManager().openBackpackInventory(LobbyCategory.STORY_ITEMS.name(), p);
             } else
            */
-             if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde")) {
-                 e.setCancelled(true);
-                 p.performCommand("profile");
-             } else if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lNavigator §8» §7§oTelepotiere dich durch die Welt")) {
+            if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde")) {
+                e.setCancelled(true);
+                p.performCommand("profile");
+            } else if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lNavigator §8» §7§oTeleportiere dich durch die Welt")) {
                 new NavigatorInventory(p);
                 e.setCancelled(true);
                 p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
@@ -79,8 +79,10 @@ public class InventoryTriggerListener implements Listener {
                 new CommunitySettingsInventory(p);
             } else if (e.getItem().getType() == Material.EYE_OF_ENDER) {
                 if (e.getAction() == Action.RIGHT_CLICK_AIR | e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-                    e.setCancelled(true);
-                    CommunityPlugin.getInstance().getShieldManager().auto(p);
+                    if (p.hasPermission("community.protective.shield.admin")) {
+                        e.setCancelled(true);
+                        CommunityPlugin.getInstance().getShieldManager().auto(p);
+                    }
                 }
             }
         }

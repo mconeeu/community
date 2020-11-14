@@ -47,7 +47,7 @@ public class PlayerJoinListener implements Listener {
         if (p.hasPermission("system.bukkit.vanish")) {
             cp.setVanished(true);
         }
-        p.getInventory().setItem(0, new ItemBuilder(Material.COMPASS, 1, 0).displayName("§3§lNavigator §8» §7§oTelepotiere dich durch die Welt").create());
+        p.getInventory().setItem(0, new ItemBuilder(Material.COMPASS, 1, 0).displayName("§3§lNavigator §8» §7§oTeleportiere dich durch die Welt").create());
         //p.getInventory().setItem(1, new ItemBuilder(Material.STORAGE_MINECART, 1, 0).displayName("§3§lRucksack §8» §7§oZeige deine gesammelten Items an").create());
         p.getInventory().setItem(8, new Skull(p.getName(), 1).toItemBuilder().displayName("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde").create());
         p.getInventory().setItem(7, VanishPlayerVisibility.EVERYBODY.getItem());

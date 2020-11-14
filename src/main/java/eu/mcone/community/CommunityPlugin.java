@@ -58,8 +58,8 @@ public class CommunityPlugin extends GamePlugin {
         communityWorld = CoreSystem.getInstance().getWorldManager().getWorld("Community-new");
         CoreSystem.getInstance().enableSpawnCommand(this, communityWorld, 0);
 
-        buildSystem = CoreSystem.getInstance().initialiseBuildSystem(BuildSystem.BuildEvent.BLOCK_BREAK, BuildSystem.BuildEvent.BLOCK_PLACE);
-        buildSystem.addFilter(BuildSystem.BuildEvent.INTERACT, 69);
+        buildSystem = CoreSystem.getInstance().initialiseBuildSystem(BuildSystem.BuildEvent.BLOCK_BREAK, BuildSystem.BuildEvent.BLOCK_PLACE, BuildSystem.BuildEvent.INTERACT);
+        buildSystem.addFilter(BuildSystem.BuildEvent.INTERACT, 69, 143, 77, 70, 72, 148, 147);
 
         sendConsoleMessage("§aLoading Commands, Events, CoreInventories...");
         registerEvents(

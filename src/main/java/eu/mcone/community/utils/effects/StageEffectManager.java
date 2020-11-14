@@ -36,8 +36,6 @@ public class StageEffectManager {
         }, 1, 2);
 
         effectsType.put(stageEffects, shedular);
-
-        System.out.println("start effect" + stageEffects.getLocName());
     }
 
 
@@ -45,7 +43,6 @@ public class StageEffectManager {
         Bukkit.getScheduler().cancelTask(effectsType.get(stageEffects));
         effectsType.remove(stageEffects);
 
-        System.out.println("stop effect" + stageEffects.getLocName());
     }
 
 
