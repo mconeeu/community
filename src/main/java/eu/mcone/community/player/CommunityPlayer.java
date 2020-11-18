@@ -20,4 +20,5 @@ public class CommunityPlayer extends GamePlayer<CommunityPlayerProfile> {
     protected void saveData() {
         CommunityPlugin.getInstance().saveGameProfile(new CommunityPlayerProfile(corePlayer.bukkit()));
     }
+
 }

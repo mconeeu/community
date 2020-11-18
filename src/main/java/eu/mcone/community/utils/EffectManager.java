@@ -26,7 +26,7 @@ public class EffectManager {
 
     private static void setBlass() {
         if (blass) {
-            blassShedular = Bukkit.getScheduler().scheduleSyncRepeatingTask(CommunityPlugin.getSystem(), () -> {
+            blassShedular = Bukkit.getScheduler().scheduleSyncRepeatingTask(CommunityPlugin.getInstance(), () -> {
                 for (Player all : Bukkit.getOnlinePlayers()) {
                     if (Bukkit.getOnlinePlayers().size() == 0) {
                         cancelAllTask();

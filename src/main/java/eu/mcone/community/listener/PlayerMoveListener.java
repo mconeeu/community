@@ -23,11 +23,9 @@ public class PlayerMoveListener implements Listener {
         Location buehne3 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("buehen1");
         Location buehne4 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("buehen2");
 
-
         //back stairs out/entrance
         Location backStairs1 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("buehne-s2");
         Location backStairs2 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("buehne-s1");
-
 
         //entrance
         Location entrance1 = CommunityPlugin.getInstance().getCommunityWorld().getLocation("entrance1");

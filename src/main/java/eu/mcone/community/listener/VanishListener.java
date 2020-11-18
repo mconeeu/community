@@ -19,6 +19,5 @@ public class VanishListener implements Listener {
                 CommunityPlugin.getInstance().getMessenger().sendTransl(player.bukkit(), "community.vanishlistener.forcefield.deactivated");
             }
         }
-
     }
 }

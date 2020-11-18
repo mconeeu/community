@@ -12,8 +12,8 @@ import eu.mcone.community.inventory.EffectPremiumInventory;
 import eu.mcone.community.inventory.NavigatorInventory;
 import eu.mcone.community.utils.PlayerHider;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Transl;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
-import eu.mcone.coresystem.api.core.translation.TranslationManager;
 import eu.mcone.lobby.api.items.LobbyCategory;
 import org.bukkit.Effect;
 import org.bukkit.Material;
@@ -36,8 +36,6 @@ public class InventoryTriggerListener implements Listener {
     public void on(PlayerInteractEvent e) {
         Player p = e.getPlayer();
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
-        TranslationManager tm = CoreSystem.getInstance().getTranslationManager();
-
 
         if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
             if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) && e.getClickedBlock() != null) {
@@ -69,11 +67,10 @@ public class InventoryTriggerListener implements Listener {
                 return;
             }
 
-
-            if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase(tm.get("system.backpack.name", cp))) {
+            if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase(Transl.get("system.backpack.name", cp))) {
                 e.setCancelled(true);
                 CommunityPlugin.getInstance().getBackpackManager().openBackpackInventory(LobbyCategory.STORY_ITEMS.name(), p);
-            } else if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase(tm.get("system.profil.name", cp))) {
+            } else if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase(Transl.get("system.profil.name", cp))) {
                 e.setCancelled(true);
                 p.performCommand("profile");
             } else if (p.getItemInHand().getItemMeta().getDisplayName().equals("§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus")) {

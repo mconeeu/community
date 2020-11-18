@@ -11,7 +11,6 @@ public class Particle {
 
     private final PacketPlayOutWorldParticles packet;
 
-
     public Particle(EnumParticle enumParticle, Location loc, float xOffset, float yOffset, float zOffset, float speed, int count) {
         float x = (float) loc.getX();
         float y = (float) loc.getY();
@@ -24,4 +23,5 @@ public class Particle {
     public void sendToAll(Player p) {
         ((CraftPlayer) p).getHandle().playerConnection.sendPacket(this.packet);
     }
+
 }

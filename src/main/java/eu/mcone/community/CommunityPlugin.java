@@ -19,23 +19,17 @@ public class CommunityPlugin extends GamePlugin {
     private static CommunityPlugin instance;
 
     @Getter
-    private static CommunityPlugin system;
-
-    @Getter
     private BuildSystem buildSystem;
     @Getter
     private CoreWorld communityWorld;
 
-    //Mainw
     public CommunityPlugin() {
         super("community", ChatColor.LIGHT_PURPLE, "community.prefix", Option.BACKPACK_MANAGER_REGISTER_OUTFIT_CATEGORY, Option.BACKPACK_MANAGER_REGISTER_HAT_CATEGORY, Option.BACKPACK_MANAGER_REGISTER_TRAIL_CATEGORY, Option.BACKPACK_MANAGER_REGISTER_EXCLUSIVE_CATEGORY, Option.BACKPACK_MANAGER_USE_RANK_BOOTS);
     }
 
-
     @Override
     public void onGameEnable() {
         instance = this;
-        system = this;
         communityWorld = CoreSystem.getInstance().getWorldManager().getWorld("Community");
         CoreSystem.getInstance().enableSpawnCommand(this, communityWorld, 0);
 
@@ -54,7 +48,6 @@ public class CommunityPlugin extends GamePlugin {
                 new VanishListener(),
                 new NpcInteractListener()
         );
-
 
         registerCommands(
                 new CommunityCMD(),
