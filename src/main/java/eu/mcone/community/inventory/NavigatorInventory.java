@@ -2,6 +2,7 @@ package eu.mcone.community.inventory;
 
 import eu.mcone.community.CommunityPlugin;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Transl;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
@@ -36,7 +37,7 @@ public class NavigatorInventory extends CoreInventory {
         setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.NETHER_STAR, 1, 0).displayName("§b§lSpawn").lore("§7§oKlicke zum Telepotieren").create(), e -> {
             CommunityPlugin.getInstance().getCommunityWorld().teleportSilently(p, "spawn");
             p.closeInventory();
-            CommunityPlugin.getInstance().getMessenger().send(p, "§aDu bist nun beim Spawn!");
+            CommunityPlugin.getInstance().getMessenger().sendTransl(p, "community.teleport.spawn.message");
         });
 
 

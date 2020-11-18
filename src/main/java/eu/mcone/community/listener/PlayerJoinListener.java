@@ -8,6 +8,7 @@ package eu.mcone.community.listener;
 import eu.mcone.community.CommunityPlugin;
 import eu.mcone.community.utils.vanish.VanishPlayerVisibility;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Transl;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
@@ -53,12 +54,12 @@ public class PlayerJoinListener implements Listener {
         p.getInventory().setItem(7, VanishPlayerVisibility.EVERYBODY.getItem());
 
         if (p.hasPermission("community.settings")) {
-            p.getInventory().setItem(6, new ItemBuilder(Material.REDSTONE_COMPARATOR, 1, 0).displayName("§3§lCommunity Einstellungen §8» §7§oBearbeite Team einstellungen").create());
+            p.getInventory().setItem(6, new ItemBuilder(Material.REDSTONE_COMPARATOR, 1, 0).displayName(Transl.get("community.inventorys.items.settings", cp)).create());
         }
 
         //only admin or HIGH RANK HIGH!!
         if (p.hasPermission("community.protective.shield.admin")) {
-            p.getInventory().setItem(5, new ItemBuilder(Material.EYE_OF_ENDER, 1, 0).displayName("§3§lSchutzschild §8» §7§oSchleuder Spieler weg").create());
+            p.getInventory().setItem(5, new ItemBuilder(Material.EYE_OF_ENDER, 1, 0).displayName(Transl.get("community.inventorys.items.forcefield", cp)).create());
         }
 
     }

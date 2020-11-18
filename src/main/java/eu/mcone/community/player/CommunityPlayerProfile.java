@@ -15,8 +15,6 @@ public class CommunityPlayerProfile extends GameProfile {
     }
 
     @Override
-    public void doSetData(Player player) {
-
-    }
+    public void doSetData(Player player) {}
 
 }

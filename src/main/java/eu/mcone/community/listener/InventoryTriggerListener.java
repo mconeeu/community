@@ -8,6 +8,7 @@ package eu.mcone.community.listener;
 import eu.mcone.community.CommunityPlugin;
 import eu.mcone.community.inventory.*;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Transl;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import org.bukkit.Effect;
 import org.bukkit.Material;
@@ -28,7 +29,7 @@ public class InventoryTriggerListener implements Listener {
     @EventHandler
     public void on(PlayerInteractEvent e) {
         Player p = e.getPlayer();
-
+        CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
 
         if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
             if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) && e.getClickedBlock() != null) {
@@ -39,7 +40,7 @@ public class InventoryTriggerListener implements Listener {
                         if (p.hasPermission("community.effectmenu")) {
                             new EffectMainInventory(p);
                         } else {
-                            CommunityPlugin.getInstance().getMessenger().send(p, "§4Du hast dafür keine Berechtigung!");
+                            CommunityPlugin.getInstance().getMessenger().sendTransl(p, "community.inventorytriggerlistener.noperms");
                         }
                     }
                 }
@@ -49,7 +50,7 @@ public class InventoryTriggerListener implements Listener {
                         if (p.hasPermission("community.premium.effectmenu")) {
                             new EffectPremiumInventory(p);
                         } else {
-                            CommunityPlugin.getInstance().getMessenger().send(p, "§4Du hast dafür keine Berechtigung!");
+                            CommunityPlugin.getInstance().getMessenger().sendTransl(p, "community.inventorytriggerlistener.noperms");
                         }
                     }
                 }

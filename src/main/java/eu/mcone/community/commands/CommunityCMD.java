@@ -12,15 +12,12 @@ public class CommunityCMD extends CorePlayerCommand {
 
     @Override
     public boolean onPlayerCommand(Player player, String[] args) {
-
-        CommunityPlugin.getGamePlugin().getMessenger().send(player, "§8§m---------- §r§5§lMCONE-Community §8§m----------");
-        CommunityPlugin.getGamePlugin().getMessenger().send(player, "§7Entwickelt von §fMarvio");
-        CommunityPlugin.getGamePlugin().getMessenger().send(player, "§r");
-        CommunityPlugin.getGamePlugin().getMessenger().send(player, "§7§oWir bemühen uns darum alle Systeme und Spielmodi so effizient wie möglich zu gestalten.");
-        CommunityPlugin.getGamePlugin().getMessenger().send(player, "§7§oDeshalb sind auch alle von uns verwendeten Plugins ausschließlich selbst entwickelt!");
-        CommunityPlugin.getGamePlugin().getMessenger().send(player, "§8§m---------- §r§5§lMCONE-Community §8§m----------");
-
-
+        CommunityPlugin.getGamePlugin().getMessenger().sendTransl(player, "community.command.community.1");
+        CommunityPlugin.getGamePlugin().getMessenger().sendTransl(player, "community.command.community.2");
+        CommunityPlugin.getGamePlugin().getMessenger().sendTransl(player, "community.command.community.3");
+        CommunityPlugin.getGamePlugin().getMessenger().sendTransl(player, "community.command.community.4");
+        CommunityPlugin.getGamePlugin().getMessenger().sendTransl(player, "community.command.community.5");
+        CommunityPlugin.getGamePlugin().getMessenger().sendTransl(player, "community.command.community.1");
         return false;
     }
 }

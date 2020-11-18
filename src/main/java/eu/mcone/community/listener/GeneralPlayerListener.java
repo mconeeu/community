@@ -87,6 +87,7 @@ public class GeneralPlayerListener implements Listener {
         e.setCancelled(true);
     }
 
+
     @EventHandler(priority = EventPriority.LOWEST)
     public void onQuit(PlayerQuitEvent e) {
         e.setQuitMessage(null);

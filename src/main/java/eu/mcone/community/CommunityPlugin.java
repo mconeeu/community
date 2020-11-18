@@ -21,9 +21,6 @@ public class CommunityPlugin extends GamePlugin {
     private static CommunityPlugin instance;
 
     @Getter
-    private static CommunityPlugin system;
-
-    @Getter
     private BuildSystem buildSystem;
     @Getter
     private CoreWorld communityWorld;
@@ -34,17 +31,16 @@ public class CommunityPlugin extends GamePlugin {
     @Getter
     private ShieldManager shieldManager;
 
-    //Main
     public CommunityPlugin() {
         super("community", ChatColor.LIGHT_PURPLE, "community.prefix", Option.BACKPACK_MANAGER_REGISTER_OUTFIT_CATEGORY,
                 Option.BACKPACK_MANAGER_REGISTER_HAT_CATEGORY, Option.BACKPACK_MANAGER_REGISTER_TRAIL_CATEGORY,
                 Option.BACKPACK_MANAGER_REGISTER_EXCLUSIVE_CATEGORY, Option.BACKPACK_MANAGER_AUTO_SET_RANK_BOOTS);
     }
 
-
     @Override
     public void onGameEnable() {
         instance = this;
+        communityWorld = CoreSystem.getInstance().getWorldManager().getWorld("Community");
         system = this;
 
         sendConsoleMessage("§aLoading StageEffectManager...");

@@ -2,6 +2,7 @@ package eu.mcone.community.inventory;
 
 import eu.mcone.community.CommunityPlugin;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Transl;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
@@ -13,17 +14,16 @@ import org.bukkit.entity.Player;
 public class ChooseStageInventory extends CoreInventory {
 
     public ChooseStageInventory(Player player) {
-        super("§f§lAuswahl", player, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
+        super(Transl.get("community.choosestage.title", CoreSystem.getInstance().getCorePlayer(player)), player, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(player);
 
-
-        setItem(InventorySlot.ROW_2_SLOT_4, new ItemBuilder(Material.GOLD_BLOCK, 1, 0).displayName("§c§lPremium Stage").lore("§7§oKlicke hier zum bearbeiten").create(), e -> {
+        setItem(InventorySlot.ROW_2_SLOT_4, new ItemBuilder(Material.GOLD_BLOCK, 1, 0).displayName(Transl.get("community.choosestage.premium.display", cp)).lore(Transl.get("system.edit.message", cp)).create(), e -> {
             player.closeInventory();
             new EffectPremiumInventory(player);
 
         });
 
-        setItem(InventorySlot.ROW_2_SLOT_6, new ItemBuilder(Material.DIAMOND_BLOCK, 1, 0).displayName("§c§lMain Stage").lore("§7§oKlicke hier zum bearbeiten").create(), e -> {
+        setItem(InventorySlot.ROW_2_SLOT_6, new ItemBuilder(Material.DIAMOND_BLOCK, 1, 0).displayName(Transl.get("community.choosestage.main.display", cp)).lore(Transl.get("system.edit.message", cp)).create(), e -> {
             player.closeInventory();
             new EffectMainInventory(player);
         });
