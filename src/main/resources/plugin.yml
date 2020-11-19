@@ -1,9 +1,9 @@
 name: MCONE-Community
-authors: [ Marvin Hülsmann, Rufus Maiwald, Louis Bockel ]
+authors: [Marvin Hülsmann, Rufus Maiwald, Louis Bockel]
 version: ${project.version}
 main: eu.mcone.community.CommunityPlugin
-depend: [ MCONE-BukkitCoreSystem, MCONE-GameAPI ]
-softdepend: [ NoCheatPlus ]
+depend: [MCONE-BukkitCoreSystem,MCONE-GameAPI]
+softdepend: [NoCheatPlus]
 permissions:
   community:
     description: Community Main Permission

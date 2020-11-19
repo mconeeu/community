@@ -24,32 +24,24 @@ public class StageEffectManager {
     }
 
     public void startEffect(StageEffects stageEffects) {
-
-        Integer shedular = Bukkit.getScheduler().scheduleSyncRepeatingTask(CommunityPlugin.getSystem(), () -> {
-
+        Integer shedular = Bukkit.getScheduler().scheduleSyncRepeatingTask(CommunityPlugin.getInstance(), () -> {
             for (int i = 1; i <= stageEffects.getAmount(); i++) {
-
                 Particle particle = new Particle(stageEffects.getParticle().getEnumParticle(), CommunityPlugin.getInstance().getCommunityWorld().getLocation(stageEffects.getLocName() + i), stageEffects.getParticle().getXOffSet(), stageEffects.getParticle().getYOffSet(), stageEffects.getParticle().getZOffSet(), stageEffects.getParticle().getSpeed(), stageEffects.getParticle().getCount());
                 particle.sendToAll();
             }
-
         }, 1, 2);
 
         effectsType.put(stageEffects, shedular);
     }
 
-
     public void stopEffect(StageEffects stageEffects) {
         Bukkit.getScheduler().cancelTask(effectsType.get(stageEffects));
         effectsType.remove(stageEffects);
-
     }
-
 
     public void clearAllEffects() {
         effectsType.clear();
         Bukkit.getScheduler().cancelAllTasks();
     }
-
 
 }

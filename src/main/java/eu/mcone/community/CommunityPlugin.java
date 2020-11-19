@@ -7,6 +7,7 @@ import eu.mcone.community.utils.effects.ShieldManager;
 import eu.mcone.community.utils.effects.StageEffectManager;
 import eu.mcone.community.utils.vanish.VanishManager;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.listener.RegionEnterPermissionCanceller;
 import eu.mcone.coresystem.api.bukkit.world.BuildSystem;
 import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
 import eu.mcone.gameapi.api.GamePlugin;
@@ -14,6 +15,7 @@ import eu.mcone.gameapi.api.Option;
 import eu.mcone.lobby.api.items.LobbyCategory;
 import lombok.Getter;
 import org.bukkit.ChatColor;
+import org.bukkit.event.Listener;
 
 public class CommunityPlugin extends GamePlugin {
 
@@ -32,7 +34,7 @@ public class CommunityPlugin extends GamePlugin {
     private ShieldManager shieldManager;
 
     public CommunityPlugin() {
-        super("community", ChatColor.LIGHT_PURPLE, "community.prefix", Option.BACKPACK_MANAGER_REGISTER_OUTFIT_CATEGORY,
+        super("Community", ChatColor.LIGHT_PURPLE, "community.prefix", Option.BACKPACK_MANAGER_REGISTER_OUTFIT_CATEGORY,
                 Option.BACKPACK_MANAGER_REGISTER_HAT_CATEGORY, Option.BACKPACK_MANAGER_REGISTER_TRAIL_CATEGORY,
                 Option.BACKPACK_MANAGER_REGISTER_EXCLUSIVE_CATEGORY, Option.BACKPACK_MANAGER_AUTO_SET_RANK_BOOTS);
     }
@@ -41,22 +43,23 @@ public class CommunityPlugin extends GamePlugin {
     public void onGameEnable() {
         instance = this;
         communityWorld = CoreSystem.getInstance().getWorldManager().getWorld("Community");
-        system = this;
 
         sendConsoleMessage("§aLoading StageEffectManager...");
         stageEffectManager = new StageEffectManager();
+
         sendConsoleMessage("§aLoading VanishManager...");
         vanishManager = new VanishManager(this);
+
         sendConsoleMessage("§aLoading ShieldManager...");
         shieldManager = new ShieldManager();
 
-
-        communityWorld = CoreSystem.getInstance().getWorldManager().getWorld("Community-new");
+        communityWorld = CoreSystem.getInstance().getWorldManager().getWorld("Community");
         CoreSystem.getInstance().enableSpawnCommand(this, communityWorld, 0);
 
         buildSystem = CoreSystem.getInstance().initialiseBuildSystem(BuildSystem.BuildEvent.BLOCK_BREAK, BuildSystem.BuildEvent.BLOCK_PLACE, BuildSystem.BuildEvent.INTERACT);
         buildSystem.addFilter(BuildSystem.BuildEvent.INTERACT, 69, 143, 77, 70, 72, 148, 147);
 
+        Listener l = new RegionEnterPermissionCanceller(communityWorld, "community.buehne", true, "buehne");
         sendConsoleMessage("§aLoading Commands, Events, CoreInventories...");
         registerEvents(
                 new PlayerJoinListener(),
@@ -65,14 +68,15 @@ public class CommunityPlugin extends GamePlugin {
                 new EntitiyDamageListener(),
                 new PlayerQuitListener(),
                 new PlayerMoveListener(),
-                new PermissionChangeListener()
+                new PermissionChangeListener(),
+                l
         );
+        System.out.println("registered "+l);
 
         registerCommands(
                 new CommunityCMD(),
                 new EffectCMD()
         );
-        getBackpackManager().loadAdditionalCategories(LobbyCategory.STORY_ITEMS.name());
 
         sendConsoleMessage("§aVersion §f" + this.getDescription().getVersion() + "§a enabled...");
     }

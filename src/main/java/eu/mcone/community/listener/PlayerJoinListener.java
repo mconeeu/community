@@ -12,6 +12,7 @@ import eu.mcone.coresystem.api.bukkit.facades.Transl;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
+import eu.mcone.gameapi.api.HotbarItem;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -49,7 +50,7 @@ public class PlayerJoinListener implements Listener {
             cp.setVanished(true);
         }
         p.getInventory().setItem(0, new ItemBuilder(Material.COMPASS, 1, 0).displayName("§3§lNavigator §8» §7§oTeleportiere dich durch die Welt").create());
-        //p.getInventory().setItem(1, new ItemBuilder(Material.STORAGE_MINECART, 1, 0).displayName("§3§lRucksack §8» §7§oZeige deine gesammelten Items an").create());
+        p.getInventory().setItem(1, HotbarItem.BACKPACK);
         p.getInventory().setItem(8, new Skull(p.getName(), 1).toItemBuilder().displayName("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde").create());
         p.getInventory().setItem(7, VanishPlayerVisibility.EVERYBODY.getItem());
 

@@ -10,6 +10,9 @@ import eu.mcone.community.inventory.*;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.facades.Transl;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
+import eu.mcone.gameapi.api.HotbarItem;
+import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.api.items.LobbyCategory;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -62,12 +65,9 @@ public class InventoryTriggerListener implements Listener {
             }
 
 
-          /* if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lRucksack §8» §7§oZeige deine gesammelten Items an")) {
-                LobbyPlugin.getInstance().getMessenger().send(p, "§4Hier ist etwas schief gelaufen...");
-                //    CommunityPlugin.getInstance().getBackpackManager().openBackpackInventory(LobbyCategory.STORY_ITEMS.name(), p);
-            } else
-           */
-            if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde")) {
+           if (e.getItem().equals(HotbarItem.BACKPACK)) {
+                CommunityPlugin.getInstance().getBackpackManager().openBackpackInventory(LobbyCategory.STORY_ITEMS.name(), p);
+            } else if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde")) {
                 e.setCancelled(true);
                 p.performCommand("profile");
             } else if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lNavigator §8» §7§oTeleportiere dich durch die Welt")) {
