@@ -4,6 +4,7 @@ version: ${project.version}
 main: eu.mcone.community.CommunityPlugin
 depend: [MCONE-BukkitCoreSystem,MCONE-GameAPI]
 softdepend: [NoCheatPlus]
+
 permissions:
   community:
     description: Community Main Permission
@@ -12,3 +13,21 @@ permissions:
         description: change settings
       community.build:
         description: build on the community
+      community.effectmenu:
+        description: use the effect menu of the main stage
+      community.premium:
+        description: Use the premium features (for the premium stage)
+        children:
+          community.premium.effectmenu:
+            description: Use the effect menu of the premium stage
+          community.premium.stage:
+            description: Access to the premium stage
+      community.stage:
+        description: Access to the stage
+      community.shield:
+        description: Allows to use the area shield
+        children:
+          community.shield.bypass:
+            description: Allows to bypass the shields movement
+      community.teamhouse:
+        description: Allows access to the teamhouse

@@ -1,8 +1,8 @@
 package eu.mcone.community;
 
-import eu.mcone.community.listener.*;
 import eu.mcone.community.commands.CommunityCMD;
 import eu.mcone.community.commands.EffectCMD;
+import eu.mcone.community.listener.*;
 import eu.mcone.community.utils.effects.ShieldManager;
 import eu.mcone.community.utils.effects.StageEffectManager;
 import eu.mcone.community.utils.vanish.VanishManager;
@@ -12,10 +12,8 @@ import eu.mcone.coresystem.api.bukkit.world.BuildSystem;
 import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
 import eu.mcone.gameapi.api.GamePlugin;
 import eu.mcone.gameapi.api.Option;
-import eu.mcone.lobby.api.items.LobbyCategory;
 import lombok.Getter;
 import org.bukkit.ChatColor;
-import org.bukkit.event.Listener;
 
 public class CommunityPlugin extends GamePlugin {
 
@@ -59,7 +57,6 @@ public class CommunityPlugin extends GamePlugin {
         buildSystem = CoreSystem.getInstance().initialiseBuildSystem(BuildSystem.BuildEvent.BLOCK_BREAK, BuildSystem.BuildEvent.BLOCK_PLACE, BuildSystem.BuildEvent.INTERACT);
         buildSystem.addFilter(BuildSystem.BuildEvent.INTERACT, 69, 143, 77, 70, 72, 148, 147);
 
-        Listener l = new RegionEnterPermissionCanceller(communityWorld, "community.buehne", true, "buehne");
         sendConsoleMessage("§aLoading Commands, Events, CoreInventories...");
         registerEvents(
                 new PlayerJoinListener(),
@@ -69,9 +66,8 @@ public class CommunityPlugin extends GamePlugin {
                 new PlayerQuitListener(),
                 new PlayerMoveListener(),
                 new PermissionChangeListener(),
-                l
+                new RegionEnterPermissionCanceller(communityWorld, "community.stage", true, "stage", "stage-front")
         );
-        System.out.println("registered "+l);
 
         registerCommands(
                 new CommunityCMD(),

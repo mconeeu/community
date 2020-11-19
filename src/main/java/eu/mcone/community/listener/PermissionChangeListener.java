@@ -46,7 +46,7 @@ public class PermissionChangeListener implements Listener {
             p.getInventory().setItem(6, new ItemBuilder(Material.REDSTONE_COMPARATOR, 1, 0).displayName("§3§lCommunity Einstellungen §8» §7§oBearbeite Team einstellungen").create());
         }
 
-        if (p.hasPermission("community.protective.shield.admin")) {
+        if (p.hasPermission("community.shield")) {
             p.getInventory().setItem(5, new ItemBuilder(Material.EYE_OF_ENDER, 1, 0).displayName("§3§lSchutzschild §8» §7§oSchleuder Spieler weg").create());
         }
     }

@@ -13,7 +13,6 @@ import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.gameapi.api.HotbarItem;
-import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -59,7 +58,7 @@ public class PlayerJoinListener implements Listener {
         }
 
         //only admin or HIGH RANK HIGH!!
-        if (p.hasPermission("community.protective.shield.admin")) {
+        if (p.hasPermission("community.shield")) {
             p.getInventory().setItem(5, new ItemBuilder(Material.EYE_OF_ENDER, 1, 0).displayName(Transl.get("community.inventorys.items.forcefield", cp)).create());
         }
 

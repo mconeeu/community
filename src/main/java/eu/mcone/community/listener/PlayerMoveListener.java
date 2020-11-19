@@ -1,10 +1,7 @@
 package eu.mcone.community.listener;
 
 import eu.mcone.community.CommunityPlugin;
-import eu.mcone.gameapi.api.backpack.defaults.DefaultItem;
-import eu.mcone.gameapi.api.player.GamePlayer;
 import org.bukkit.Location;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -50,7 +47,7 @@ public class PlayerMoveListener implements Listener {
 
 
         //backstage
-        if (!p.hasPermission("community.premium.buehne")) {
+        if (!p.hasPermission("community.premium.stage")) {
             if (
                     p.getLocation().distance(premiumBuehne1) <= 2 ||
                             p.getLocation().distance(premiumBuehne2) <= 2 ||
@@ -62,7 +59,7 @@ public class PlayerMoveListener implements Listener {
             }
         }
 
-        if (!p.hasPermission("community.buehne")) {
+        if (!p.hasPermission("community.stage")) {
             //entrance left
             if (p.getLocation().distance(buehne1) <= 2 ||
                     p.getLocation().distance(buehne2) <= 2 ||
@@ -80,8 +77,9 @@ public class PlayerMoveListener implements Listener {
                 p.setVelocity(v1);
             }
         }
+
         //entrance backstairs
-        if (!p.hasPermission("community.entrance.buehne")) {
+        if (!p.hasPermission("community.stage")) {
             if (p.getLocation().distance(backStairs1) <= 2 ||
                     p.getLocation().distance(backStairs2) <= 2 ||
                     p.getLocation().distance(backStairs3) <= 2 ||

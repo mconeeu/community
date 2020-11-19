@@ -6,14 +6,15 @@
 package eu.mcone.community.listener;
 
 import eu.mcone.community.CommunityPlugin;
-import eu.mcone.community.inventory.*;
+import eu.mcone.community.inventory.CommunitySettingsInventory;
+import eu.mcone.community.inventory.EffectMainInventory;
+import eu.mcone.community.inventory.EffectPremiumInventory;
+import eu.mcone.community.inventory.NavigatorInventory;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.facades.Transl;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.gameapi.api.HotbarItem;
-import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.items.LobbyCategory;
-import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -22,12 +23,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
-
-import java.util.HashMap;
 
 public class InventoryTriggerListener implements Listener {
-
 
     @EventHandler
     public void on(PlayerInteractEvent e) {
@@ -75,12 +72,12 @@ public class InventoryTriggerListener implements Listener {
                 e.setCancelled(true);
                 p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
 
-            } else if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lCommunity Einstellungen §8» §7§oBearbeite Team einstellungen")) {
+            } else if (e.getItem().getItemMeta().getDisplayName().equals(Transl.get("community.inventorys.items.settings", cp))) {
                 e.setCancelled(true);
                 new CommunitySettingsInventory(p);
             } else if (e.getItem().getType() == Material.EYE_OF_ENDER) {
                 if (e.getAction() == Action.RIGHT_CLICK_AIR | e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-                    if (p.hasPermission("community.protective.shield.admin")) {
+                    if (p.hasPermission("community.shield")) {
                         e.setCancelled(true);
                         CommunityPlugin.getInstance().getShieldManager().auto(p);
                     }
