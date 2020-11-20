@@ -2,10 +2,6 @@ package eu.mcone.community.listener;
 
 import eu.mcone.community.inventory.PlayerHiderInventory;
 import eu.mcone.community.utils.vanish.VanishManager;
-import eu.mcone.coresystem.api.bukkit.CoreSystem;
-import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.api.player.HotbarItem;
-import eu.mcone.lobby.api.player.vanish.VanishPlayerVisibility;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

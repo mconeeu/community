@@ -13,6 +13,8 @@ permissions:
         description: change settings
       community.build:
         description: build on the community
+      community.backstage:
+          description: entrance and backstage area from the main stage
       community.effectmenu:
         description: use the effect menu of the main stage
       community.premium:

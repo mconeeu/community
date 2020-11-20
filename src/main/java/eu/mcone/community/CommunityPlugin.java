@@ -3,6 +3,7 @@ package eu.mcone.community;
 import eu.mcone.community.commands.CommunityCMD;
 import eu.mcone.community.commands.EffectCMD;
 import eu.mcone.community.listener.*;
+import eu.mcone.community.utils.TimeManager;
 import eu.mcone.community.utils.effects.ShieldManager;
 import eu.mcone.community.utils.effects.StageEffectManager;
 import eu.mcone.community.utils.vanish.VanishManager;
@@ -30,6 +31,8 @@ public class CommunityPlugin extends GamePlugin {
     private VanishManager vanishManager;
     @Getter
     private ShieldManager shieldManager;
+    @Getter
+    private TimeManager timeManager;
 
     public CommunityPlugin() {
         super("Community", ChatColor.LIGHT_PURPLE, "community.prefix", Option.BACKPACK_MANAGER_REGISTER_OUTFIT_CATEGORY,
@@ -51,6 +54,9 @@ public class CommunityPlugin extends GamePlugin {
         sendConsoleMessage("§aLoading ShieldManager...");
         shieldManager = new ShieldManager();
 
+        sendConsoleMessage("§aLoading TimeManager...");
+        timeManager = new TimeManager();
+
         communityWorld = CoreSystem.getInstance().getWorldManager().getWorld("Community");
         CoreSystem.getInstance().enableSpawnCommand(this, communityWorld, 0);
 
@@ -65,8 +71,9 @@ public class CommunityPlugin extends GamePlugin {
                 new EntitiyDamageListener(),
                 new PlayerQuitListener(),
                 new PlayerMoveListener(),
-                new PermissionChangeListener(),
-                new RegionEnterPermissionCanceller(communityWorld, "community.stage", true, "stage", "stage-front")
+                new ChangeListener(),
+                new RegionEnterListener()
+              //  new RegionEnterPermissionCanceller(communityWorld, "community.stage", true, "stage", "stage-front")
         );
 
         registerCommands(

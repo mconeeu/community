@@ -50,7 +50,6 @@ public class GeneralPlayerListener implements Listener {
                 CommunityPlugin.getInstance().getMessenger().send(player.bukkit(), "§4Das Schutzschild wurde deaktivert, weil du den Vanish Modus betreten hast!");
             }
         }
-
     }
 
     @EventHandler

@@ -44,14 +44,7 @@ public class PlayerHiderInventory extends CoreInventory {
     private void updateHiderSystem(Player p, eu.mcone.community.utils.vanish.VanishPlayerVisibility target, VanishManager vanishManager) {
         player.closeInventory();
 
-        if (!CoreSystem.getInstance().getCooldownSystem().addAndCheck(getClass(), p.getUniqueId())) {
-            // CommunityPlugin.getInstance().getMessenger().sendError(p, "§4Bitte warte kurz, bevor du erneut die Sichbarkeit von Spielern veränderst!");
-            return;
-        }
-
         vanishManager.setVanishPlayerVisibility(player, target);
-
-
         p.getInventory().setItem(InventorySlot.ROW_1_SLOT_8, CommunityPlugin.getInstance().getVanishManager().getVanishPlayerVisibility(p).getItem());
     }
 }

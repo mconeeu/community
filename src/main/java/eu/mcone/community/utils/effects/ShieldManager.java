@@ -24,7 +24,7 @@ public class ShieldManager {
         if (!cp.isVanished()) {
             if (run.containsKey(p)) {
                 CommunityPlugin.getInstance().getMessenger().send(p, "§cDas Schutzschild wurde deaktiviert");
-                p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 2F, 0.5F);
+                CoreSystem.getInstance().getSoundManager().play(p,  Sound.SUCCESSFUL_HIT);
                 run.get(p).cancel();
                 run.remove(p);
             } else if (!run.containsKey(p)) {
@@ -41,7 +41,7 @@ public class ShieldManager {
                 });
                 run.get(p).runTaskTimer(CommunityPlugin.getInstance(), 20, 20);
                 CommunityPlugin.getInstance().getMessenger().send(p, "§aDas Schutzschild wurde aktiviert");
-                p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 2F, 1F);
+                CoreSystem.getInstance().getSoundManager().play(p,  Sound.SUCCESSFUL_HIT);
             }
         } else {
             if (run.containsKey(p)) {
@@ -54,7 +54,8 @@ public class ShieldManager {
 
     public void push(Player p) {
         for (Player players : run.keySet()) {
-            if (!p.hasPermission("community.bypass")) {
+            CorePlayer corePlayer = CoreSystem.getInstance().getCorePlayer(p);
+            if (!p.hasPermission("community.bypass") || corePlayer.isNicked()) {
                 if (p.getLocation().distance(players.getLocation()) <= 5) {
 
                     double Ax = p.getLocation().getX();
@@ -80,7 +81,8 @@ public class ShieldManager {
                 if (entity instanceof Player) {
                     Player target = (Player) entity;
                     if (p != target) {
-                        if (!target.hasPermission("community.bypass")) {
+                        CorePlayer corePlayer = CoreSystem.getInstance().getCorePlayer(target);
+                        if (!target.hasPermission("community.bypass") || corePlayer.isNicked()) {
 
                             double Ax = p.getLocation().getX();
                             double Ay = p.getLocation().getY();

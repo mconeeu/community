@@ -1,6 +1,5 @@
 package eu.mcone.community.utils;
 
-import eu.mcone.community.CommunityPlugin;
 import net.minecraft.server.v1_8_R3.EnumParticle;
 import net.minecraft.server.v1_8_R3.PacketPlayOutWorldParticles;
 import org.bukkit.Bukkit;
