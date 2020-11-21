@@ -1,6 +1,7 @@
 package eu.mcone.community;
 
 import eu.mcone.community.commands.CommunityCMD;
+import eu.mcone.community.commands.CurrentEventCMD;
 import eu.mcone.community.commands.EffectCMD;
 import eu.mcone.community.commands.EventCMD;
 import eu.mcone.community.listener.*;
@@ -10,7 +11,6 @@ import eu.mcone.community.utils.effects.ShieldManager;
 import eu.mcone.community.utils.effects.StageEffectManager;
 import eu.mcone.community.utils.vanish.VanishManager;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
-import eu.mcone.coresystem.api.bukkit.listener.RegionEnterPermissionCanceller;
 import eu.mcone.coresystem.api.bukkit.world.BuildSystem;
 import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
 import eu.mcone.gameapi.api.GamePlugin;
@@ -22,7 +22,6 @@ public class CommunityPlugin extends GamePlugin {
 
     @Getter
     private static CommunityPlugin instance;
-
     @Getter
     private BuildSystem buildSystem;
     @Getter
@@ -85,7 +84,8 @@ public class CommunityPlugin extends GamePlugin {
         registerCommands(
                 new CommunityCMD(),
                 new EffectCMD(),
-                new EventCMD()
+                new EventCMD(),
+                new CurrentEventCMD()
         );
 
         sendConsoleMessage("§aVersion §f" + this.getDescription().getVersion() + "§a enabled...");

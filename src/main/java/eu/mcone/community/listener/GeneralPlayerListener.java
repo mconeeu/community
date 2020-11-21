@@ -2,7 +2,6 @@ package eu.mcone.community.listener;
 
 import eu.mcone.community.CommunityPlugin;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
-import eu.mcone.coresystem.api.bukkit.command.CorePlayerCommand;
 import eu.mcone.coresystem.api.bukkit.event.player.PlayerVanishEvent;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import org.bukkit.GameMode;

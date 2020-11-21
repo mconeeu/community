@@ -15,11 +15,9 @@ import eu.mcone.gameapi.api.player.GamePlayer;
 import lombok.Getter;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import javax.activation.CommandObject;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -79,7 +77,6 @@ public class VanishManager {
 
         p.setWalkSpeed(0.2F);
 
-
         p.getInventory().clear();
         p.getInventory().setArmorContents(null);
         p.setGameMode(GameMode.ADVENTURE);
@@ -88,9 +85,6 @@ public class VanishManager {
         p.setMaxHealth(20);
         p.setHealth(20);
         p.setFoodLevel(20);
-
-
-
 
         GamePlayer gamePlayer = CommunityPlugin.getInstance().getGamePlayer(cp.bukkit());
 
@@ -101,15 +95,12 @@ public class VanishManager {
                 p.getInventory().setItem(0, new ItemBuilder(Material.COMPASS, 1, 0).displayName(Transl.get("community.inventorys.items.navigator", cp)).create());
                 p.getInventory().setItem(1, HotbarItem.BACKPACK);
 
-
                 p.getInventory().setItem(7, VanishPlayerVisibility.EVERYBODY.getItem().displayName(Transl.get("system.inventory.playerhider.all")).create());
-
 
                 if (p.hasPermission("community.settings") && !cp.isNicked()) {
                     p.getInventory().setItem(6, new ItemBuilder(Material.REDSTONE_COMPARATOR, 1, 0).displayName(Transl.get("community.inventorys.items.settings", cp)).create());
                 }
 
-                //only admin or HIGH RANK HIGH!!
                 if (p.hasPermission("community.shield") && !cp.isNicked()) {
                     p.getInventory().setItem(5, new ItemBuilder(Material.EYE_OF_ENDER, 1, 0).displayName(Transl.get("community.inventorys.items.forcefield", cp)).create());
                 }
@@ -120,14 +111,12 @@ public class VanishManager {
         }
     }
 
-
     private static ItemBuilder getProfile(SkinInfo skin, CorePlayer corePlayer) {
         String PROFILE_DISPLAY_NAME = Transl.get("system.inventorys.items.profile", corePlayer);
         return Skull.fromMojangValue(skin.getValue(), 1)
                 .toItemBuilder()
                 .displayName(PROFILE_DISPLAY_NAME);
     }
-
 
     public void playerLeaved(Player p) {
         hiddenPlayers.remove(p);
