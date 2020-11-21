@@ -2,7 +2,9 @@ package eu.mcone.community;
 
 import eu.mcone.community.commands.CommunityCMD;
 import eu.mcone.community.commands.EffectCMD;
+import eu.mcone.community.commands.EventCMD;
 import eu.mcone.community.listener.*;
+import eu.mcone.community.utils.EventManager;
 import eu.mcone.community.utils.TimeManager;
 import eu.mcone.community.utils.effects.ShieldManager;
 import eu.mcone.community.utils.effects.StageEffectManager;
@@ -32,6 +34,8 @@ public class CommunityPlugin extends GamePlugin {
     @Getter
     private ShieldManager shieldManager;
     @Getter
+    private EventManager eventManager;
+    @Getter
     private TimeManager timeManager;
 
     public CommunityPlugin() {
@@ -54,6 +58,9 @@ public class CommunityPlugin extends GamePlugin {
         sendConsoleMessage("§aLoading ShieldManager...");
         shieldManager = new ShieldManager();
 
+        sendConsoleMessage("§aLoading EventManager...");
+        eventManager = new EventManager();
+
         sendConsoleMessage("§aLoading TimeManager...");
         timeManager = new TimeManager();
 
@@ -70,7 +77,6 @@ public class CommunityPlugin extends GamePlugin {
                 new GeneralPlayerListener(),
                 new EntitiyDamageListener(),
                 new PlayerQuitListener(),
-                new PlayerMoveListener(),
                 new ChangeListener(),
                 new RegionEnterListener()
               //  new RegionEnterPermissionCanceller(communityWorld, "community.stage", true, "stage", "stage-front")
@@ -78,7 +84,8 @@ public class CommunityPlugin extends GamePlugin {
 
         registerCommands(
                 new CommunityCMD(),
-                new EffectCMD()
+                new EffectCMD(),
+                new EventCMD()
         );
 
         sendConsoleMessage("§aVersion §f" + this.getDescription().getVersion() + "§a enabled...");

@@ -7,7 +7,7 @@ import net.minecraft.server.v1_8_R3.EnumParticle;
 public enum EffectTypes {
 
     FIRE(StageEffects.FIRE, EnumParticle.LAVA, 0, 2, 0, 10, 5),
-    KONFETTI(StageEffects.KONFETTI, EnumParticle.DRIP_LAVA, 5, 5, 5, 10, 47),
+    CONFETTI(StageEffects.KONFETTI, EnumParticle.DRIP_LAVA, 5, 5, 5, 10, 47),
     SNOW(StageEffects.SNOW, EnumParticle.SNOWBALL, 5, 3, 5, 1, 25),
     BLASS(StageEffects.BLASS, EnumParticle.SPELL_MOB_AMBIENT, 5, 7, 5, 1, 45),
     MUSIC(StageEffects.MUSIC, EnumParticle.NOTE, 1, 2, 1, 3, 3),

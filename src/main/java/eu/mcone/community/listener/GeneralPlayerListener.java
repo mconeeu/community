@@ -1,11 +1,8 @@
-/*
- * Copyright (c) 2017 - 2019 Rufus Maiwald, Marvin Hülsmann, Dominik Lippl and the MC ONE Minecraftnetwork. All rights reserved
- * You are not allowed to decompile the code
- */
-
 package eu.mcone.community.listener;
 
 import eu.mcone.community.CommunityPlugin;
+import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.command.CorePlayerCommand;
 import eu.mcone.coresystem.api.bukkit.event.player.PlayerVanishEvent;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import org.bukkit.GameMode;
@@ -16,10 +13,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.player.PlayerAchievementAwardedEvent;
-import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerPickupItemEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.event.weather.WeatherChangeEvent;
 
 public class GeneralPlayerListener implements Listener {
@@ -37,6 +31,19 @@ public class GeneralPlayerListener implements Listener {
         if (e.getEntity() instanceof Player) {
             e.setCancelled(true);
         }
+    }
+
+    @EventHandler
+    public void on(PlayerMoveEvent e) {
+        Player p = e.getPlayer();
+        CommunityPlugin.getInstance().getShieldManager().push(p);
+    }
+
+    @EventHandler
+    public void on(PlayerRespawnEvent e) {
+
+        CorePlayer cp = CoreSystem.getInstance().getCorePlayer(e.getPlayer());
+        CommunityPlugin.getInstance().getVanishManager().updateInventory(cp);
     }
 
     @EventHandler
@@ -75,10 +82,13 @@ public class GeneralPlayerListener implements Listener {
     public void onDeath(PlayerDeathEvent e) {
         Player p = e.getEntity();
 
-        e.setKeepInventory(true);
-        e.setKeepLevel(true);
+        e.getDrops().clear();
+        e.setDroppedExp(0);
+
+
         e.setDeathMessage("");
         p.spigot().respawn();
+        p.teleport(CommunityPlugin.getInstance().getCommunityWorld().getLocation("spawn"));
     }
 
     @EventHandler

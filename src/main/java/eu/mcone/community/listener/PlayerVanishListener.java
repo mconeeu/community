@@ -27,7 +27,7 @@ public class PlayerVanishListener implements Listener {
             }
 
             for (eu.mcone.community.utils.vanish.VanishPlayerVisibility target : eu.mcone.community.utils.vanish.VanishPlayerVisibility.values()) {
-                if (i.equals(target.getItem())) {
+                if (i.equals(target.getItem().create())) {
                     new PlayerHiderInventory(p, manager);
                     break;
                 }

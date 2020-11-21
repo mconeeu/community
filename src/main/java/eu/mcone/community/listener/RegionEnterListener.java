@@ -14,7 +14,6 @@ public class RegionEnterListener implements Listener {
     public void onRegionEnter(RegionEnterEvent e) {
         CorePlayer corePlayer = CoreSystem.getInstance().getCorePlayer(e.getPlayer());
 
-
         for (CommunityRegion region : CommunityRegion.values()) {
             if (region.getRegionName().equals(e.getRegion().getName())) {
                 if (!corePlayer.isNicked()) {
@@ -23,19 +22,17 @@ public class RegionEnterListener implements Listener {
                             return;
                         }
                     }
-
                 }
                 preventEnter(corePlayer.bukkit(), region.isBoost(), e);
             }
         }
     }
 
-
     private void preventEnter(Player player, boolean velocity, RegionEnterEvent event) {
         if (velocity) {
             player.getPlayer().setVelocity(player.getLocation().getDirection().normalize().setY(0).multiply(-1));
         }
         event.setCancelled(true);
-        CoreSystem.getInstance().getMessenger().sendError(player, "Du darfst diesen Bereich nicht betreten");
+        CoreSystem.getInstance().getMessenger().sendTransl(player, "community.stage.area");
     }
 }

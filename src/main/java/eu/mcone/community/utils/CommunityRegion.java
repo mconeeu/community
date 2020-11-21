@@ -14,7 +14,6 @@ public enum CommunityRegion {
     STAGENTRANCE2("stageEntrance2", true, "community.backstage", "community.stage"),
     PREMIUMSTAGEENTRANCE("premiumStageEntrance", true,"commmunity.premium.stage", "community.backstage", "community.stage");
 
-
     private final String regionName;
     private final boolean boost;
     private final String[] permissions;

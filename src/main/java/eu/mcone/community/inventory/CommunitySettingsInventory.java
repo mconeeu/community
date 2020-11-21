@@ -65,6 +65,13 @@ public class CommunitySettingsInventory extends CoreInventory {
             });
         }
 
+        if (p.hasPermission("community.events")) {
+            setItem(InventorySlot.ROW_2_SLOT_6, new ItemBuilder(Material.GLASS_BOTTLE, 1, 0).displayName("§a§lEvents").lore("§7§oKlicke zum bearbeiten").create(), e -> {
+                p.closeInventory();
+                new EventInventory(p);
+            });
+        }
+
         openInventory();
     }
 }

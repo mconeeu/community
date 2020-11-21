@@ -2,6 +2,7 @@ package eu.mcone.community.utils.effects;
 
 import eu.mcone.community.CommunityPlugin;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Transl;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import lombok.Getter;
 import org.bukkit.Effect;
@@ -23,8 +24,8 @@ public class ShieldManager {
 
         if (!cp.isVanished()) {
             if (run.containsKey(p)) {
-                CommunityPlugin.getInstance().getMessenger().send(p, "§cDas Schutzschild wurde deaktiviert");
-                CoreSystem.getInstance().getSoundManager().play(p,  Sound.SUCCESSFUL_HIT);
+                CommunityPlugin.getInstance().getMessenger().sendTransl(cp.bukkit(), "community.protect.deactivated");
+                CoreSystem.getInstance().getSoundManager().play(p, Sound.SUCCESSFUL_HIT);
                 run.get(p).cancel();
                 run.remove(p);
             } else if (!run.containsKey(p)) {
@@ -40,15 +41,15 @@ public class ShieldManager {
 
                 });
                 run.get(p).runTaskTimer(CommunityPlugin.getInstance(), 20, 20);
-                CommunityPlugin.getInstance().getMessenger().send(p, "§aDas Schutzschild wurde aktiviert");
-                CoreSystem.getInstance().getSoundManager().play(p,  Sound.SUCCESSFUL_HIT);
+                CommunityPlugin.getInstance().getMessenger().sendTransl(cp.bukkit(), "community.protect.active");
+                CoreSystem.getInstance().getSoundManager().play(p, Sound.SUCCESSFUL_HIT);
             }
         } else {
             if (run.containsKey(p)) {
                 run.get(p).cancel();
                 run.remove(p);
             }
-            CommunityPlugin.getInstance().getMessenger().send(p, "§4Du darfst im Vanish Modus das Schutzschild nicht benutzen!");
+            CommunityPlugin.getInstance().getMessenger().sendTransl(cp.bukkit(), "community.protect.vanish");
         }
     }
 
@@ -57,21 +58,7 @@ public class ShieldManager {
             CorePlayer corePlayer = CoreSystem.getInstance().getCorePlayer(p);
             if (!p.hasPermission("community.bypass") || corePlayer.isNicked()) {
                 if (p.getLocation().distance(players.getLocation()) <= 5) {
-
-                    double Ax = p.getLocation().getX();
-                    double Ay = p.getLocation().getY();
-                    double Az = p.getLocation().getZ();
-
-                    double Bx = players.getLocation().getX();
-                    double By = players.getLocation().getY();
-                    double Bz = players.getLocation().getZ();
-
-                    double x = Ax - Bx;
-                    double y = Ay - By;
-                    double z = Az - Bz;
-                    Vector v = new Vector(x, y, z).normalize();
-                    p.setVelocity(v);
-
+                    math(players, p, false);
                 }
             }
         }
@@ -83,21 +70,7 @@ public class ShieldManager {
                     if (p != target) {
                         CorePlayer corePlayer = CoreSystem.getInstance().getCorePlayer(target);
                         if (!target.hasPermission("community.bypass") || corePlayer.isNicked()) {
-
-                            double Ax = p.getLocation().getX();
-                            double Ay = p.getLocation().getY();
-                            double Az = p.getLocation().getZ();
-
-                            double Bx = target.getLocation().getX();
-                            double By = target.getLocation().getY();
-                            double Bz = target.getLocation().getZ();
-
-                            double x = Bx - Ax;
-                            double y = By - Ay;
-                            double z = Bz - Az;
-                            Vector v = new Vector(x, y, z).normalize();
-                            target.setVelocity(v);
-
+                            math(target, p, true);
                         }
                     }
                 }
@@ -105,4 +78,31 @@ public class ShieldManager {
         }
     }
 
+    private void math(Player target, Player p, boolean first) {
+        double Ax = p.getLocation().getX();
+        double Ay = p.getLocation().getY();
+        double Az = p.getLocation().getZ();
+
+        double Bx = target.getLocation().getX();
+        double By = target.getLocation().getY();
+        double Bz = target.getLocation().getZ();
+
+        if (first) {
+            double x = Bx - Ax;
+            double y = By - Ay;
+            double z = Bz - Az;
+
+            Vector v = new Vector(x, y, z).normalize();
+            target.setVelocity(v);
+
+        } else {
+
+            double x = Ax - Bx;
+            double y = Ay - By;
+            double z = Az - Bz;
+            Vector v = new Vector(x, y, z).normalize();
+            p.setVelocity(v);
+
+        }
+    }
 }

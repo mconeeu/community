@@ -17,6 +17,8 @@ permissions:
           description: entrance and backstage area from the main stage
       community.effectmenu:
         description: use the effect menu of the main stage
+      community.events:
+        description: can start events
       community.premium:
         description: Use the premium features (for the premium stage)
         children:

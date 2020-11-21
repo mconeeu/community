@@ -20,7 +20,6 @@ public class ChooseStageInventory extends CoreInventory {
         setItem(InventorySlot.ROW_2_SLOT_4, new ItemBuilder(Material.GOLD_BLOCK, 1, 0).displayName(Transl.get("community.choosestage.premium.display", cp)).lore(Transl.get("system.edit.message", cp)).create(), e -> {
             player.closeInventory();
             new EffectPremiumInventory(player);
-
         });
 
         setItem(InventorySlot.ROW_2_SLOT_6, new ItemBuilder(Material.DIAMOND_BLOCK, 1, 0).displayName(Transl.get("community.choosestage.main.display", cp)).lore(Transl.get("system.edit.message", cp)).create(), e -> {

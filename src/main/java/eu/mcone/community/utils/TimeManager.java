@@ -2,7 +2,6 @@ package eu.mcone.community.utils;
 
 import eu.mcone.community.CommunityPlugin;
 import eu.mcone.gameapi.api.player.GamePlayer;
-import eu.mcone.lobby.api.player.LobbyPlayer;
 
 import java.time.LocalDateTime;
 

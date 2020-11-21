@@ -58,7 +58,13 @@ public class VanishManager {
 
             GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(target.equals(eu.mcone.community.utils.vanish.VanishPlayerVisibility.EVERYBODY));
 
-            CommunityPlugin.getInstance().getMessenger().sendSuccess(p, "Du hast die Spielersichtbarkeit auf ![" + target.getName() + "] geändert!");
+            if (target.getName().equals(VanishPlayerVisibility.EVERYBODY.getName())) {
+                CommunityPlugin.getInstance().getMessenger().send(p, Transl.get("system.playerhider.visibility.change", p) + "[" + Transl.get("system.playerhider.all", p) + "]");
+            } else if (target.getName().equals(VanishPlayerVisibility.ONLY_VIPS.getName())) {
+                CommunityPlugin.getInstance().getMessenger().send(p, Transl.get("system.playerhider.visibility.change", p) + "[" + Transl.get("system.playerhider.vip", p) + "]");
+            } else {
+                CommunityPlugin.getInstance().getMessenger().send(p, Transl.get("system.playerhider.visibility.change", p) + "[" + Transl.get("system.playerhider.none", p) + "]");
+            }
 
         }
     }
@@ -84,12 +90,6 @@ public class VanishManager {
         p.setFoodLevel(20);
 
 
-        p.getInventory().setItem(0, new ItemBuilder(Material.COMPASS, 1, 0).displayName("§3§lNavigator §8» §7§oTeleportiere dich durch die Welt").create());
-        p.getInventory().setItem(1, HotbarItem.BACKPACK);
-        p.getInventory().setItem(8, new Skull(p.getName(), 1).toItemBuilder().displayName("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde").create());
-
-
-        p.getInventory().setItem(7, VanishPlayerVisibility.EVERYBODY.getItem());
 
 
         GamePlayer gamePlayer = CommunityPlugin.getInstance().getGamePlayer(cp.bukkit());
@@ -97,6 +97,12 @@ public class VanishManager {
         if (gamePlayer != null) {
             Bukkit.getScheduler().runTaskLater(CommunityPlugin.getInstance(), () -> {
                 CommunityPlugin.getInstance().getBackpackManager().setRankBoots(p);
+
+                p.getInventory().setItem(0, new ItemBuilder(Material.COMPASS, 1, 0).displayName(Transl.get("community.inventorys.items.navigator", cp)).create());
+                p.getInventory().setItem(1, HotbarItem.BACKPACK);
+
+
+                p.getInventory().setItem(7, VanishPlayerVisibility.EVERYBODY.getItem().displayName(Transl.get("system.inventory.playerhider.all")).create());
 
 
                 if (p.hasPermission("community.settings") && !cp.isNicked()) {
@@ -108,15 +114,15 @@ public class VanishManager {
                     p.getInventory().setItem(5, new ItemBuilder(Material.EYE_OF_ENDER, 1, 0).displayName(Transl.get("community.inventorys.items.forcefield", cp)).create());
                 }
 
-                p.getInventory().setItem(8, getProfile(!cp.isNicked() ? cp.getSkin() : cp.getNick().getSkinInfo()).create());
+                p.getInventory().setItem(8, getProfile(!cp.isNicked() ? cp.getSkin() : cp.getNick().getSkinInfo(), cp).create());
 
             }, 5);
         }
     }
 
 
-    private static ItemBuilder getProfile(SkinInfo skin) {
-        String PROFILE_DISPLAY_NAME = "§3§lProfil §8» §7§oEinstellungen / Stats / Freunde";
+    private static ItemBuilder getProfile(SkinInfo skin, CorePlayer corePlayer) {
+        String PROFILE_DISPLAY_NAME = Transl.get("system.inventorys.items.profile", corePlayer);
         return Skull.fromMojangValue(skin.getValue(), 1)
                 .toItemBuilder()
                 .displayName(PROFILE_DISPLAY_NAME);

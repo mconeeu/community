@@ -13,7 +13,6 @@ public class EffectMainInventory extends CoreInventory {
 
     public EffectMainInventory(Player player) {
         super("§f§lMain Stage", player, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
-        CorePlayer cp = CoreSystem.getInstance().getCorePlayer(player);
 
         int i = InventorySlot.ROW_2_SLOT_2;
 

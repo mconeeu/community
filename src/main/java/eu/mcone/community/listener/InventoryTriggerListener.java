@@ -1,8 +1,3 @@
-/*
- * Copyright (c) 2017 - 2019 Rufus Maiwald, Marvin Hülsmann, Dominik Lippl and the MC ONE Minecraftnetwork. All rights reserved
- * You are not allowed to decompile the code
- */
-
 package eu.mcone.community.listener;
 
 import eu.mcone.community.CommunityPlugin;
@@ -64,10 +59,10 @@ public class InventoryTriggerListener implements Listener {
 
            if (e.getItem().equals(HotbarItem.BACKPACK)) {
                 CommunityPlugin.getInstance().getBackpackManager().openBackpackInventory(LobbyCategory.STORY_ITEMS.name(), p);
-            } else if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde")) {
+            } else if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase(Transl.get("system.inventorys.items.profile", cp))) {
                 e.setCancelled(true);
                 p.performCommand("profile");
-            } else if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lNavigator §8» §7§oTeleportiere dich durch die Welt")) {
+            } else if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase(Transl.get("community.inventorys.items.navigator", cp))) {
                 new NavigatorInventory(p);
                 e.setCancelled(true);
                 p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
