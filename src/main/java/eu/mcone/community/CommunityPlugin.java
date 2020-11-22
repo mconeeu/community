@@ -5,16 +5,24 @@ import eu.mcone.community.commands.CurrentEventCMD;
 import eu.mcone.community.commands.EffectCMD;
 import eu.mcone.community.commands.EventCMD;
 import eu.mcone.community.listener.*;
+import eu.mcone.community.utils.Captures;
 import eu.mcone.community.utils.EventManager;
 import eu.mcone.community.utils.TimeManager;
 import eu.mcone.community.utils.effects.ShieldManager;
 import eu.mcone.community.utils.effects.StageEffectManager;
 import eu.mcone.community.utils.vanish.VanishManager;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.npc.NPC;
+import eu.mcone.coresystem.api.bukkit.spawnable.ListMode;
 import eu.mcone.coresystem.api.bukkit.world.BuildSystem;
 import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
+import eu.mcone.coresystem.api.core.exception.MotionCaptureNotDefinedException;
 import eu.mcone.gameapi.api.GamePlugin;
 import eu.mcone.gameapi.api.Option;
+import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.api.story.progress.StoryProgress;
+import eu.mcone.lobby.api.story.progress.TraderStoryProgress;
+import eu.mcone.lobby.api.story.progress.TutorialStoryProgress;
 import lombok.Getter;
 import org.bukkit.ChatColor;
 
@@ -45,6 +53,7 @@ public class CommunityPlugin extends GamePlugin {
 
     @Override
     public void onGameEnable() {
+
         instance = this;
         communityWorld = CoreSystem.getInstance().getWorldManager().getWorld("Community");
 
@@ -62,6 +71,9 @@ public class CommunityPlugin extends GamePlugin {
 
         sendConsoleMessage("§aLoading TimeManager...");
         timeManager = new TimeManager();
+
+        sendConsoleMessage("§aLoading Captures...");
+        loadCaptures();
 
         communityWorld = CoreSystem.getInstance().getWorldManager().getWorld("Community");
         CoreSystem.getInstance().enableSpawnCommand(this, communityWorld, 0);
@@ -94,6 +106,20 @@ public class CommunityPlugin extends GamePlugin {
     @Override
     public void onGameDisable() {
         sendConsoleMessage("§cPlugin disabled!");
+    }
+
+
+    private static void loadCaptures() {
+        for (Captures capture : Captures.values()) {
+            try {
+                capture.getNpc().playMotionCapture(capture.getCapture());
+                CoreSystem.getInstance().getNpcManager().getMotionCaptureHandler().getMotionCaptureScheduler().addNpc(capture.getNpc());
+            } catch (MotionCaptureNotDefinedException e) {
+                CommunityPlugin.getInstance().sendConsoleMessage("§cCould not load motion capture "+capture.getCapture());
+            } catch (NullPointerException e) {
+                CommunityPlugin.getInstance().sendConsoleMessage("§cCould not load npc "+capture.getNpcName()+" for capture motion  "+capture.name());
+            }
+        }
     }
 
 }
