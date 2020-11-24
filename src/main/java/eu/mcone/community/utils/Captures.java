@@ -7,6 +7,7 @@ import lombok.Getter;
 @Getter
 public enum Captures {
 
+    C1("c-1", "c-1"),
     C2("c-2", "c-2"),
     C3("c-3", "c-3"),
     C4("c-4", "c-4"),
@@ -15,7 +16,9 @@ public enum Captures {
     C7("c-7", "c-7"),
     C8("c-8", "c-8"),
     C9("c-9", "c-9"),
-    C10("c-10", "c-10");
+    C10("c-10", "c-10"),
+    C11("c-11", "c-11"),
+    C12("c-12", "c-12");
 
 
     private final String capture, npcName;
