@@ -38,7 +38,7 @@ public class NpcListener implements Listener {
                 playEmote(true, playerNpc, e.getPlayer());
                 break;
             case "c-11":
-                CommunityPlugin.getInstance().getMessenger().sendSimple(e.getPlayer(), prefix + "Kennt ihr schon AllInOne? Bitte direkt installieren ohne wiederworte! (Crissi stinkt)");
+                CommunityPlugin.getInstance().getMessenger().sendSimple(e.getPlayer(), prefix + "Kennst du schon AllInOne? Installier es dir direkt!! Keine Widerworte! (Chrissi stinkt <3)");
                 playEmote(true, playerNpc, e.getPlayer());
                 break;
             case "c-6":
@@ -47,7 +47,6 @@ public class NpcListener implements Listener {
                 break;
         }
     }
-
 
     private void playEmote(boolean normal, PlayerNpc playerNpc, Player player) {
         if (normal) {
