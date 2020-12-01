@@ -8,18 +8,27 @@ import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class EventManager {
 
     @Getter
     public HashSet<Event> currentEvent = new HashSet<>();
+    @Getter
+    public HashMap<Player, Event> eventList = new HashMap<>();
 
     private boolean isLoading = false;
 
     public void auto(Player player, Event event) {
         if (!isLoading) {
-            toggleEvent(event, !currentEvent.contains(event));
+            if (!currentEvent.contains(event)) {
+                toggleEvent(event, true);
+                eventList.put(player, event);
+            } else {
+                toggleEvent(event, false);
+                eventList.remove(player, event);
+            }
         } else {
             CommunityPlugin.getInstance().getMessenger().send(player, "§4Bitte warte bis das Event gestartet wurde!");
         }
@@ -60,10 +69,25 @@ public class EventManager {
                 }, 20);
 
             } else {
-                CoreSystem.getInstance().createTitle().fadeIn(1).fadeOut(1).stay(2).title("§4" + event.getName() + " §lEvent").send(cp.bukkit());
-                CommunityPlugin.getInstance().getMessenger().send(cp.bukkit(), "§4Das §c" + event.getName() + "§4 Event ist nun beendet!");
+                cancelEventMessages(event);
                 currentEvent.remove(event);
             }
+        }
+    }
+
+    public void cancelEventFromPlayer(Player p) {
+        if (eventList.containsKey(p)) {
+
+            cancelEventMessages(eventList.get(p));
+            currentEvent.remove(eventList.get(p));
+            eventList.remove(p);
+        }
+    }
+
+    private void cancelEventMessages(Event event) {
+        for (CorePlayer cp : CoreSystem.getInstance().getOnlineCorePlayers()) {
+            CoreSystem.getInstance().createTitle().fadeIn(1).fadeOut(1).stay(2).title("§4" + event.getName() + " §lEvent").send(cp.bukkit());
+            CommunityPlugin.getInstance().getMessenger().send(cp.bukkit(), "§4Das §c" + event.getName() + "§4 Event ist nun beendet!");
         }
     }
 }

@@ -9,12 +9,14 @@ public class PlayerQuitListener implements Listener {
 
     @EventHandler
     public void on(PlayerQuitEvent e) {
+
         if (CommunityPlugin.getInstance().getShieldManager().getRun().containsKey(e.getPlayer())) {
             CommunityPlugin.getInstance().getShieldManager().getRun().get(e.getPlayer()).cancel();
             CommunityPlugin.getInstance().getShieldManager().getRun().remove(e.getPlayer());
-
-            CommunityPlugin.getInstance().getVanishManager().playerLeaved(e.getPlayer());
-
         }
+
+        CommunityPlugin.getInstance().getVanishManager().playerLeaved(e.getPlayer());
+        CommunityPlugin.getInstance().getEventManager().cancelEventFromPlayer(e.getPlayer());
+
     }
 }

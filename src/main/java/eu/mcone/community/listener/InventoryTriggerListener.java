@@ -8,16 +8,23 @@ import eu.mcone.community.inventory.NavigatorInventory;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.facades.Transl;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
+import eu.mcone.gameapi.api.GameAPI;
 import eu.mcone.gameapi.api.HotbarItem;
 import eu.mcone.lobby.api.items.LobbyCategory;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.block.BlockFace;
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.spigotmc.event.entity.EntityDismountEvent;
 
 public class InventoryTriggerListener implements Listener {
 
@@ -30,7 +37,20 @@ public class InventoryTriggerListener implements Listener {
             if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) && e.getClickedBlock() != null) {
                 Material clicked = e.getClickedBlock().getType();
 
-                if (clicked == Material.STONE_BUTTON) {
+                if (clicked.equals(Material.COBBLESTONE_STAIRS) || clicked.equals(Material.WOOD_STAIRS) || clicked.equals(Material.DARK_OAK_STAIRS)
+                        || clicked.equals(Material.BIRCH_WOOD_STAIRS) || clicked.equals(Material.ACACIA_STAIRS)
+                        || clicked.equals(Material.BRICK_STAIRS)
+                        || clicked.equals(Material.SPRUCE_WOOD_STAIRS)
+                        || clicked.equals(Material.SMOOTH_STAIRS)) {
+
+                    if (e.getBlockFace().getOppositeFace().equals(BlockFace.DOWN)) {
+                        sitDownPlayer(p, e.getClickedBlock().getLocation().add(0.5, 0, 0.5));
+                    }
+
+                }
+
+
+                if (clicked.equals(Material.STONE_BUTTON)) {
                     if (CommunityPlugin.getInstance().getCommunityWorld().getBlockLocation("effect").equals(e.getClickedBlock().getLocation())) {
                         if (p.hasPermission("community.effectmenu")) {
                             new EffectMainInventory(p);
@@ -57,7 +77,7 @@ public class InventoryTriggerListener implements Listener {
             }
 
 
-           if (e.getItem().equals(HotbarItem.BACKPACK)) {
+            if (e.getItem().equals(HotbarItem.BACKPACK)) {
                 CommunityPlugin.getInstance().getBackpackManager().openBackpackInventory(LobbyCategory.STORY_ITEMS.name(), p);
             } else if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase(Transl.get("system.inventorys.items.profile", cp))) {
                 e.setCancelled(true);
@@ -79,6 +99,26 @@ public class InventoryTriggerListener implements Listener {
                 }
             }
         }
+    }
 
+
+    public void sitDownPlayer(Player p, Location spawnLocation) {
+        Arrow arrow = (Arrow) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.ARROW);
+        arrow.setCustomNameVisible(true);
+
+        Bukkit.getScheduler().runTaskLater(GameAPI.getInstance(), () -> {
+            arrow.setPassenger(p);
+            CoreSystem.getInstance().createActionBar()
+                    .message("§f§oBenutze LSHIFT um aufzustehen")
+                    .send(p);
+        }, 2L);
+    }
+
+
+    @EventHandler
+    public void onSitUp(EntityDismountEvent e) {
+        if (e.getDismounted().getType().equals(EntityType.ARROW)) {
+            e.getDismounted().remove();
+        }
     }
 }
