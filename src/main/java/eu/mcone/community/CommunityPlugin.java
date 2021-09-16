@@ -12,18 +12,12 @@ import eu.mcone.community.utils.effects.ShieldManager;
 import eu.mcone.community.utils.effects.StageEffectManager;
 import eu.mcone.community.utils.vanish.VanishManager;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
-import eu.mcone.coresystem.api.bukkit.npc.NPC;
-import eu.mcone.coresystem.api.bukkit.spawnable.ListMode;
+import eu.mcone.coresystem.api.bukkit.listener.EntityDamageCanceller;
 import eu.mcone.coresystem.api.bukkit.world.BuildSystem;
 import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
 import eu.mcone.coresystem.api.core.exception.MotionCaptureNotDefinedException;
-import eu.mcone.coresystem.api.core.translation.Language;
 import eu.mcone.gameapi.api.GamePlugin;
 import eu.mcone.gameapi.api.Option;
-import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.api.story.progress.StoryProgress;
-import eu.mcone.lobby.api.story.progress.TraderStoryProgress;
-import eu.mcone.lobby.api.story.progress.TutorialStoryProgress;
 import lombok.Getter;
 import org.bukkit.ChatColor;
 
@@ -54,7 +48,6 @@ public class CommunityPlugin extends GamePlugin {
 
     @Override
     public void onGameEnable() {
-
         instance = this;
         communityWorld = CoreSystem.getInstance().getWorldManager().getWorld("Community");
 
@@ -79,7 +72,6 @@ public class CommunityPlugin extends GamePlugin {
         communityWorld = CoreSystem.getInstance().getWorldManager().getWorld("Community");
         CoreSystem.getInstance().enableSpawnCommand(this, communityWorld, 0);
 
-
         buildSystem = CoreSystem.getInstance().initialiseBuildSystem(BuildSystem.BuildEvent.BLOCK_BREAK, BuildSystem.BuildEvent.BLOCK_PLACE, BuildSystem.BuildEvent.INTERACT);
         buildSystem.addFilter(BuildSystem.BuildEvent.INTERACT, 69, 143, 77, 70, 72, 148, 147);
 
@@ -92,7 +84,8 @@ public class CommunityPlugin extends GamePlugin {
                 new PlayerQuitListener(),
                 new ChangeListener(),
                 new RegionEnterListener(),
-                new NpcListener()
+                new NpcListener(),
+                new EntityDamageCanceller()
               //  new RegionEnterPermissionCanceller(communityWorld, "community.stage", true, "stage", "stage-front")
         );
 
